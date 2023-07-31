@@ -1,0 +1,48 @@
+body {
+  background: linear-gradient(90deg, rgb(68, 68, 91), rgba(111, 91, 91, 0.694));
+}
+.required {
+  color: red;
+}
+.forgot_password {
+  position: relative;
+  float: right;
+  color: rgb(120, 120, 188);
+}
+.forgot_password::after {
+  content: "";
+  position: absolute;
+  top: 25px;
+  right: 0px;
+  height: 2px;
+  width: 100%;
+  background: rgb(57, 57, 206);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: all 0.5s;
+}
+.forgot_password:hover {
+  color: rgb(57, 57, 206);
+}
+.forgot_password:hover::after {
+  transform: scaleX(1);
+}
+.bi-check-circle-fill {
+  font-size: 30px;
+  height: 30px;
+}
+.input-group,
+.form-group {
+  position: relative;
+}
+.bi-eye-fill,
+.bi-eye-slash-fill {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  z-index: 10;
+}
+.form-group .bi-eye-fill,
+.form-group .bi-eye-slash-fill {
+  top: 30px;
+}
