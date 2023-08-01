@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import api from './../util/api'
 import toast from 'react-hot-toast';
 import { useNavigate, Link } from 'react-router-dom';
+import axios from 'axios';
 
 const initialUser = {
   userName: '', email: '', password: '', role: { statusValue: '' }, mobileNo: '', altMobileNo: ''
@@ -101,8 +102,8 @@ const UserRegister = () => {
             });
             // console.log(users);
             // console.log(res.data);
-            setExtUsers(users)
-            // setExtUsers(res.data)
+            // setExtUsers(users)
+            setExtUsers(res.data)
           }).catch(err => console.log(err.message))
       }
       initialFetch()
@@ -148,7 +149,7 @@ const UserRegister = () => {
                       </div>
                       <div className="form-group mt-3">
                         <label htmlFor="reporting_to">Reporting_To <span className='required'>*</span></label>
-                        <select onChange={reportingHandler}
+                        <select onChange={reportingHandler} value={reportingTo}
                           className="form-select" name='reporting_to' id='reporting_to' required>
                           <option value="" hidden>Select</option>
                           {

@@ -51,21 +51,22 @@ const Opportunity = () => {
     e.preventDefault()
     try {
       let oppId = null;
-      const oppRes = await api.post(`/app/saveOpportunity/contact_0001/offering_00001`)
+      const oppRes = await api.post(`/api/app/saveOpportunity/${contactId}/${offeringId}`, opportunity)
       // console.log(oppRes);
       if (oppRes.status === 201) {
         oppId = oppRes.data.opportunityId
       }
       if (oppId) {
-        const oppSubRes = await api.post(`/api/app/saveOpportunitySub/${oppId}`)
+        const oppSubRes = await api.post(`/api/app/saveOpportunitySub/${oppId}`, opportunitySub)
         // console.log(oppSubRes);
-        if (oppSubRes.status === 200) toast.success('Opportunity Created Successfully');
-        else toast.error(oppSubRes.response.data)
-        oppId = ''
-        setOpportunity(initialOpportunity)
-        setOpportunitySub(initialOpportunitySub)
-        contactId('')
-        offeringId('')
+        if (oppSubRes.status === 201) {
+          toast.success('Opportunity Created Successfully');
+          oppId = ''
+          setOpportunity(initialOpportunity)
+          setOpportunitySub(initialOpportunitySub)
+          setContactId('')
+          setOfferingId('')
+        }
       }
     } catch (error) {
       console.log(error.message);
@@ -81,6 +82,7 @@ const Opportunity = () => {
         const contactResponse = await api.get('/ContactController/get_all_contact')
         // console.log(contactResponse);
         if (contactResponse.status === 200) setContacts(contactResponse.data)
+
       }
       initialFetch()
     } catch (error) {

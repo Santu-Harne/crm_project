@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import toast from 'react-hot-toast';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const initialState = {
-	email: 'santosh.283143@gmail.com',
-	password: 'Santosh1234$'
+	email: 'nawin1999@gmail.com',
+	password: 'naveen@cmd2023'
 }
 
 const Login = () => {
@@ -24,7 +24,6 @@ const Login = () => {
 	const showPassword = (inputId) => {
 		const input = document.getElementById(inputId)
 		const eye = document.getElementById('eye-symbol')
-		// alert(input)
 		if (input.type === 'password') {
 			input.type = 'text'
 			eye.classList.remove('bi-eye-fill')
@@ -46,11 +45,21 @@ const Login = () => {
 				localStorage.setItem('token', response.data.jwtToken)
 				toast.success('Login successful')
 				setUser(initialState)
+				navigate('/user_register')
 			}).catch(error => {
 				// console.log(error.message);
 				toast.error(error.response.data)
 			})
 	}
+
+	useEffect(() => {
+		const initialFetch = () => {
+			axios.get('https://official-joke-api.appspot.com/random_joke')
+				.then(res => console.log(res))
+				.catch(err => console.error(err.message))
+		}
+		initialFetch()
+	}, [])
 	return (
 		<div className='container'>
 			<div className="row d-flex justify-content-center">
