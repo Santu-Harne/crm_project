@@ -9,6 +9,8 @@ import Opportunity from './components/Opportunity';
 import ProtectedRoute from './middleware/ProtectedRoute';
 import UpdateUser from './components/UpdateUser';
 import ResetPassword from './components/ResetPassword';
+import NavBar from './components/NavBar';
+import UserDashboard from './components/UserDashboard';
 
 
 function App() {
@@ -16,12 +18,14 @@ function App() {
     <div>
       <BrowserRouter>
         <Toaster />
+        <NavBar />
         <Routes>
           <Route path='/login' element={<Login />} />
+          <Route path='/forgot_password' element={<ForgotPassword />} />
           <Route element={<ProtectedRoute />}>
             <Route path='/' element={<Login />} />
+            <Route path='/user_dashboard/:username' element={<UserDashboard />} />
             <Route path='/user_register' element={<UserRegister />} />
-            <Route path='/forgot_password' element={<ForgotPassword />} />
             <Route path='/sales_person' element={<SalesPerson />} />
             <Route path='/opportunity' element={<Opportunity />} />
             <Route path='/update_user' element={<UpdateUser />} />

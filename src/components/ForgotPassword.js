@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 
 const initialState = { email: '', otp: '', newPassword: '', confirmPassword: '' }
+
 const ForgotPassword = () => {
 	const [userDetails, setUserDetails] = useState(initialState)
-	const [verified, setVerified] = useState(false)
+	const [verified, setVerified] = useState(true)
+
+	const navigate = useNavigate()
 
 	const changeHandler = (e) => {
 		const { name, value } = e.target
@@ -28,18 +32,30 @@ const ForgotPassword = () => {
 			}).catch(err => toast.error(err.response.message))
 	}
 
-	const resetHandler = (e) => {
+	const resetPasswordHandler = (e) => {
 		e.preventDefault()
 		axios.put(`/forget/changePassword/${userDetails.email}/${userDetails.newPassword}/${userDetails.confirmPassword}`)
 			.then(res => {
-				setUserDetails(initialState)
 				toast.success('Password reset successfully')
-			}).catch(err => console.log(err.message))
+				setUserDetails(initialState)
+				navigate('/login')
+			}).catch(err => toast.error(err.response.data))
 	}
-	const showPassword = (inputId) => {
+
+	// function to show and hide password field
+	const showPassword = (inputId, iconId) => {
 		const input = document.getElementById(inputId)
-		if (input.type === 'password') input.type = 'text'
-		else input.type = 'password'
+		const eye = document.getElementById(iconId)
+		if (input.type === 'password') {
+			input.type = 'text'
+			eye.classList.remove('bi-eye-fill')
+			eye.classList.add('bi-eye-slash-fill')
+		}
+		else {
+			input.type = 'password'
+			eye.classList.remove('bi-eye-slash-fill')
+			eye.classList.add('bi-eye-fill')
+		}
 	}
 
 	return (
@@ -53,7 +69,7 @@ const ForgotPassword = () => {
 						<div className="card-body">
 							<div className='input-group mb-4'>
 								<label htmlFor="email" className='input-group-text'>Email</label>
-								<input type="email" value={userDetails.email} onChange={changeHandler} name="email" id="email" className='form-control' />
+								<input type="email" value={userDetails.email} onChange={changeHandler} name="email" id="email" className='form-control' required />
 								<button className='btn btn-info text-nowrap' onClick={mailHandler}>Send OTP</button>
 							</div>
 							<div className="d-flex">
@@ -67,17 +83,17 @@ const ForgotPassword = () => {
 						</div>
 						{
 							verified ? (
-								<form onSubmit={resetHandler}>
+								<form onSubmit={resetPasswordHandler}>
 									<div className="card-footer">
 										<div className="input-group mt-4">
 											<label htmlFor="newPassword" className='input-group-text'>New Password</label>
 											<input type="password" value={userDetails.newPassword} onChange={changeHandler} name="newPassword" id="newPassword" className='form-control' pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number, one uppercase and one lowercase and at least 8 or more characters" required />
-											<span type='button' onClick={() => showPassword('newPassword')}><i className="bi bi-eye-fill"></i></span>
+											<span type='button' onClick={() => showPassword('newPassword', 'newPassword-icon')}><i className="bi bi-eye-fill" id='newPassword-icon'></i></span>
 										</div>
 										<div className="input-group my-3">
 											<label htmlFor="confirmPassword" className='input-group-text'>Confirm Password</label>
 											<input type="password" value={userDetails.confirmPassword} onChange={changeHandler} name="confirmPassword" id="confirmPassword" className='form-control' pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number, one uppercase and one lowercase and at least 8 or more characters" required />
-											<span type='button' onClick={() => showPassword('confirmPassword')}><i className="bi bi-eye-fill"></i></span>
+											<span type='button' onClick={() => showPassword('confirmPassword', 'confirmPassword-icon')}><i className="bi bi-eye-fill" id='confirmPassword-icon'></i></span>
 										</div>
 										<button type='submit' className='btn btn-success reset_password'>Reset Password</button>
 									</div>

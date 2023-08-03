@@ -16,6 +16,7 @@ const UserRegister = () => {
   const [SalesPerson, setSalesPerson] = useState(initialSalesPerson)
   const [extUsers, setExtUsers] = useState([])
   const [reportingTo, setReportingTo] = useState('')
+  const [reportingToUsers, setReportingToUsers] = useState([])
 
   const navigate = useNavigate()
 
@@ -25,8 +26,16 @@ const UserRegister = () => {
     const { name, value } = e.target
     if (name === 'statusValue') {
       setUser({ ...user, role: { ...user.role, [name]: value } })
-      if (value === 'SalesPerson') setIsSalesPerson(true)
-      else if (value !== 'SalesPerson') setIsSalesPerson(false)
+      if (value === 'SalesPerson') {
+        setIsSalesPerson(true)
+        setReportingToUsers(extUsers)
+      }
+      else if (value !== 'SalesPerson') {
+        setIsSalesPerson(false)
+        setReportingToUsers(extUsers.filter(item => {
+          return item.authorities.some(auth => auth.authority !== "SalesPerson");
+        }))
+      }
     }
     else setUser({ ...user, [name]: value })
   }
@@ -57,18 +66,20 @@ const UserRegister = () => {
       e.preventDefault()
       const userResponse = await api.post(`/auth/saveUser/${reportingTo}`, user)
       if (userResponse.status === 200) {
-        console.log(userResponse.data);
+        // console.log(userResponse.data);
         UserId = userResponse.data.userId;
         // console.log(UserId);
       }
       if (isSalesPerson) {
         const salesPersonResponse = await api.post(`/app/saveSalesPerson/${UserId}`, SalesPerson)
-        console.log(salesPersonResponse.data);
+        // console.log(salesPersonResponse.data);
       }
       toast.success('User registered successfully')
       setIsSalesPerson(false)
       setSalesPerson(initialSalesPerson)
       setUser(initialUser)
+      setReportingTo("")
+      window.location.reload()
     } catch (error) {
       console.log(error.message);
     }
@@ -97,13 +108,9 @@ const UserRegister = () => {
       const initialFetch = () => {
         api.get('/api/getAllUsers')
           .then(res => {
-            const users = res.data.filter(item => {
-              return item.authorities.some(auth => auth.authority !== "SalesPerson");
-            });
-            // console.log(users);
             // console.log(res.data);
-            // setExtUsers(users)
             setExtUsers(res.data)
+            setReportingToUsers(res.data)
           }).catch(err => console.log(err.message))
       }
       initialFetch()
@@ -153,9 +160,9 @@ const UserRegister = () => {
                           className="form-select" name='reporting_to' id='reporting_to' required>
                           <option value="" hidden>Select</option>
                           {
-                            extUsers && extUsers.map(user => {
+                            reportingToUsers && reportingToUsers.map(user => {
                               return (
-                                <option key={user.userId} value={user.userId}>{user.userName} -- {user.userId}</option>
+                                <option key={user.userId} value={user.userId}>{user.userName} -- {user.userId} -- {user.authorities[0].authority}</option>
                               )
                             })
                           }
@@ -210,7 +217,7 @@ const UserRegister = () => {
                               <input type="text" value={SalesPerson.duration} onChange={salesPersonHandler} name="duration" id="duration" className='form-control' />
                             </div>
                           </div>
-                        </>) : ''
+                        </>) : null
                     }
                     <div className="col-12 mt-4">
                       <div className="input-group d-flex justify-content-center">

@@ -46,3 +46,6 @@ body {
 .form-group .bi-eye-slash-fill {
   top: 30px;
 }
+.navbar {
+  background: linear-gradient(90deg, rgb(103, 103, 149), rgba(215, 118, 118, 0.694));
+}

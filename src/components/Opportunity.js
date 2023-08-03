@@ -82,7 +82,6 @@ const Opportunity = () => {
         const contactResponse = await api.get('/ContactController/get_all_contact')
         // console.log(contactResponse);
         if (contactResponse.status === 200) setContacts(contactResponse.data)
-
       }
       initialFetch()
     } catch (error) {

@@ -1,10 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import api from '../util/api'
 import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 
 const initialState = { oldPassword: '', newPassword: '', confirmPassword: '' }
+
 const ResetPassword = () => {
   const [password, setPassword] = useState(initialState)
+
+  const navigate = useNavigate()
+  const email = 'santosh.283143@gmail.com'
 
   const changeHandler = (e) => {
     const { name, value } = e.target
@@ -17,22 +22,10 @@ const ResetPassword = () => {
     }
   }
 
-  const submitHandler = (e) => {
-    e.preventDefault()
-    const { oldPassword, newPassword, confirmPassword } = password
-    if (newPassword !== confirmPassword) toast.error("Passwords doesn't match!")
-    else {
-      console.log({ oldPassword, newPassword });
-      toast.success('Password changed successfully!')
-    }
-  }
-
-
   // function to show and hide password field
-  const showPassword = (inputId) => {
+  const showPassword = (inputId, iconId) => {
     const input = document.getElementById(inputId)
-    const eye = document.getElementById('eye-symbol')
-    // alert(input)
+    const eye = document.getElementById(iconId)
     if (input.type === 'password') {
       input.type = 'text'
       eye.classList.remove('bi-eye-fill')
@@ -44,6 +37,22 @@ const ResetPassword = () => {
       eye.classList.add('bi-eye-fill')
     }
   }
+
+  const submitHandler = async (e) => {
+    e.preventDefault()
+    const { oldPassword, newPassword, confirmPassword } = password
+    if (newPassword !== confirmPassword) toast.error("Passwords doesn't match!")
+    else {
+      await api.put(`/api/updatePassword/${email}/${oldPassword}/${newPassword}`)
+        .then(res => {
+          console.log(res.data);
+          toast.success(res.data)
+          setPassword(initialState)
+          navigate('/login')
+        }).catch(err => console.log(err))
+    }
+  }
+
   return (
     <div className='container'>
       <div className="row d-flex justify-content-center">
@@ -59,12 +68,12 @@ const ResetPassword = () => {
                 <div className="form-group">
                   <label htmlFor="newPassword">New Password <span className='required'>*</span></label>
                   <input type="password" name="newPassword" id="newPassword" className='form-control' value={password.newPassword} onChange={changeHandler} />
-                  <span type='button' onClick={() => showPassword('newPassword')}><i id='eye-symbol' className="bi bi-eye-fill"></i></span>
+                  <span type='button' onClick={() => showPassword('newPassword', 'password-icon')}><i id='password-icon' className="bi bi-eye-fill"></i></span>
                 </div>
                 <div className="form-group">
                   <label htmlFor="confirmPassword">Confirm Password <span className='required'>*</span></label>
                   <input type="password" name="confirmPassword" id="confirmPassword" className='form-control' value={password.confirmPassword} onChange={changeHandler} />
-                  <span type='button' onClick={() => showPassword('confirmPassword')}><i id='eye-symbol' className="bi bi-eye-fill"></i></span>
+                  <span type='button' onClick={() => showPassword('confirmPassword', 'confirm-icon')}><i id='confirm-icon' className="bi bi-eye-fill"></i></span>
                 </div>
                 <div className="input-group mt-4 d-flex justify-content-center">
                   <input type="submit" className='btn  btn-success' value={'Submit'} />
