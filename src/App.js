@@ -28,15 +28,14 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route path='/' element={<Login />} />
             <Route path='/user_dashboard/:userId' element={<UserDashboard />} />
-            <Route path='/admin/users_list/:userId' element={<UserList />} />
+            <Route path='/admin/users_list/:adminId' element={<UserList />} />
             <Route path='/user_register' element={<UserRegister />} />
             <Route path='/update_sales_person/:sp_id' element={<UpdateSalesPerson />} />
             <Route path='/opportunity' element={<Opportunity />} />
             <Route path='/update_user/:userId' element={<UpdateUser />} />
-            <Route path='/admin/updateRoleReporting/:userId' element={<UpdateUserByAdmin />} />
-            <Route path='/admin/statusUpdate/:userId' element={<StatusUpdate />} />
+            <Route path='/admin/updateRoleReporting/:adminId/:userId' element={<UpdateUserByAdmin />} />
+            <Route path='/admin/statusUpdate/:adminId/:userId' element={<StatusUpdate />} />
             <Route path='/reset_password' element={<ResetPassword />} />
-
           </Route>
         </Routes>
       </BrowserRouter>

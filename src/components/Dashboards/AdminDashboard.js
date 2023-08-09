@@ -10,7 +10,7 @@ const AdminDashboard = ({ user }) => {
         <div className='d-flex align-items-center justify-content-between'>
           <h2 className="text-info">Admin Dashboard, Hai {user.userName}</h2>
           <button type='button' className='btn btn-warning' onClick={() => navigate(`/update_user/${user.userId}`)}>Update</button>
-          <button type='button' className='btn btn-success' onClick={() => navigate(`/admin/users_list/${user.userId}`)}>UserList</button>
+          <button type='button' className='btn btn-success' onClick={() => navigate(`/admin/users_list/${user.userId}`)}>UsersList</button>
         </div>
       </div>
     </div>

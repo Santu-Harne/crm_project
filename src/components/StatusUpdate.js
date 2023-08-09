@@ -7,7 +7,7 @@ import toast from 'react-hot-toast'
 const StatusUpdate = () => {
   const [user, setUser] = useState({})
 
-  const { userId } = useParams()
+  const { adminId, userId } = useParams()
   const navigate = useNavigate()
 
 
@@ -22,7 +22,7 @@ const StatusUpdate = () => {
     api.put(`/api/updateStatus/${userId}/${user.statusValue}`)
       .then(res => {
         toast.success('User Status updated successfully')
-        navigate(`/admin/users_list/${userId}`)
+        navigate(`/admin/users_list/${adminId}`)
       }).catch(err => console.log(err))
   }
 
@@ -42,7 +42,7 @@ const StatusUpdate = () => {
         <div className="col-md-5">
           <div className="card mt-5">
             <div className="card-header d-flex justify-content-between align-items-center"><h2 className="text-info">Status Update</h2>
-              <button className='btn btn-secondary' onClick={() => navigate(`/admin/users_list/${userId}`)}>UsersList</button>
+              <button className='btn btn-secondary' onClick={() => navigate(`/admin/users_list/${adminId}`)}>UsersList</button>
             </div>
             <div className="card-body">
               <select className='form-select' name="statusValue" id="statusValue" onChange={statusHandler}>

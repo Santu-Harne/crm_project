@@ -29,7 +29,7 @@ const NavBar = () => {
                 <Link className='nav-link' to={'/user_register'}>Reg_User</Link>
               </li>
               <li className="nav-item">
-                <Link className='nav-link' to={'/admin/users_list'}>Usr_List</Link>
+                <Link className='nav-link' to={'/admin/users_list/user_0025'}>Usr_List</Link>
               </li>
               <li className="nav-item">
                 <Link className='nav-link' to={'/reset_password'}>Res_Password</Link>
@@ -41,7 +41,7 @@ const NavBar = () => {
                 <Link className='nav-link' to={'/update_user/user_0004'}>Update_User</Link>
               </li>
               <li className="nav-item">
-                <Link className='nav-link' to={'/admin/updateRoleReporting/user_0004'}>UpdBy_Admin</Link>
+                <Link className='nav-link' to={'/admin/updateRoleReporting/user_0025/user_0004'}>UpdBy_Admin</Link>
               </li>
               <li className="nav-item">
                 <Link className='nav-link' to={'/update_sales_person/Sp_0001'}>Update_SP</Link>

@@ -9,7 +9,7 @@ const UserList = () => {
   const [isLoading, setIsLoading] = useState(true)
 
   const navigate = useNavigate()
-  const { userId } = useParams()
+  const { adminId, userId } = useParams()
 
   useEffect(() => {
     const initialFetch = async () => {
@@ -28,7 +28,7 @@ const UserList = () => {
         <div className="card p-0 mt-3">
           <div className="card-header d-flex justify-content-between align-items-center">
             <h2 className="text-info">User List</h2>
-            <button className='btn btn-secondary' onClick={() => navigate(`/user_dashboard/${userId}`)}>Admin Dashboard</button>
+            <button className='btn btn-secondary' onClick={() => navigate(`/user_dashboard/${adminId}`)}>Admin Dashboard</button>
           </div>
           <div className="card-body">
             {isLoading ? (<h3 >Loading <i className="fa-solid fa-spinner fa-spin-pulse"></i></h3>) : (
@@ -54,8 +54,8 @@ const UserList = () => {
                           <td>{user.mobileNo}</td>
                           <td>{user.altMobileNo}</td>
                           <td>{user.role}</td>
-                          <td>{user.reportingUsrName} <i type='button' onClick={() => navigate(`/admin/updateRoleReporting/${user.userId}`)} className="fa-solid fa-pen-to-square float-end"></i></td>
-                          <td >{user.statusValue} <i type='button' onClick={() => navigate(`/admin/statusUpdate/${user.userId}`)} className="fa-solid fa-pen-to-square ms-2 float-end"></i></td>
+                          <td>{user.reportingUsrName} <i type='button' onClick={() => navigate(`/admin/updateRoleReporting/${adminId}/${user.userId}`)} className="fa-solid fa-pen-to-square float-end"></i></td>
+                          <td >{user.statusValue} <i type='button' onClick={() => navigate(`/admin/statusUpdate/${adminId}/${user.userId}`)} className="fa-solid fa-pen-to-square ms-2 float-end"></i></td>
 
                         </tr>
                       )

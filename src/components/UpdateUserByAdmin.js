@@ -10,7 +10,7 @@ const UpdateUserByAdmin = () => {
   const [extUsers, setExtUsers] = useState(null)
   const [reportingToUsers, setReportingToUsers] = useState(null)
 
-  const { userId } = useParams()
+  const { adminId, userId } = useParams()
   const navigate = useNavigate()
 
   const changeHandler = (e) => {
@@ -31,7 +31,7 @@ const UpdateUserByAdmin = () => {
       .then(res => {
         // console.log(res.data);
         toast.success(res.data)
-        navigate(`/admin/users_list/${userId}`)
+        navigate(`/admin/users_list/${adminId}`)
       }).catch(err => {
         console.log(err.message);
       })
@@ -44,7 +44,7 @@ const UpdateUserByAdmin = () => {
           .then(res => {
             const { role, reportingUsrId, reportingUsrName } = res.data
             setUser({ ...user, role, reportingUsrId, reportingUsrName })
-            console.log(res.data);
+            // console.log(res.data);
           }).catch(err => console.log(err.message))
         await api.get('/api/getAllUsers')
           .then(res => {
@@ -66,7 +66,7 @@ const UpdateUserByAdmin = () => {
           <div className="card mt-5">
             <div className="card-header d-flex justify-content-between align-items-center">
               <h2 className="text-info">Update By Admin</h2>
-              <button className='btn btn-secondary' onClick={() => navigate(`/admin/users_list/${userId}`)}>UsersList</button>
+              <button className='btn btn-secondary' onClick={() => navigate(`/admin/users_list/${adminId}`)}>UsersList</button>
             </div>
             <div className="card-body">
               <div className="form-group ">
