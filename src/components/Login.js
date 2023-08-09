@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const initialState = {
 	email: 'santosh.283143@gmail.com',
-	password: 'Santosh1437$'
+	password: 'Santosh@123'
 }
 
 const Login = () => {
@@ -18,7 +18,7 @@ const Login = () => {
 		setUser({ ...user, [name]: value })
 	}
 	const clearHandler = () => {
-		if (window.confirm('Are you sure you want to clear all fields?')) setUser(initialState)
+		if (window.confirm('Are you sure you want to clear all fields?')) setUser({ ...user, email: '', password: '' })
 	}
 	// function to show and hide password field
 	const showPassword = (inputId) => {
@@ -40,15 +40,15 @@ const Login = () => {
 	const submitHandler = async (e) => {
 		e.preventDefault()
 		await axios.post('/auth/login', user)
-			.then(response => {
-				console.log(response.data);
-				localStorage.setItem('token', response.data.jwtToken)
+			.then(res => {
+				// console.log(res.data);
+				localStorage.setItem('token', res.data.jwtToken)
 				toast.success('Login successful')
 				setUser(initialState)
-				navigate(`/user_dashboard/${response.data.username}`)
+				navigate(`/user_dashboard/${res.data.userId}`)
 			}).catch(error => {
 				// console.log(error.message);
-				toast.error(error.response.data)
+				toast.error('Error while login, Please try after some time!')
 			})
 	}
 	return (
@@ -75,8 +75,8 @@ const Login = () => {
 								</div>
 								<div className="col-12 mt-5 text-center">
 									<div className="input-group d-flex justify-content-center">
-										<input type="submit" className='btn  btn-success' value={'Submit'} />
-										<button className='btn btn-secondary' onClick={clearHandler}>Clear</button>
+										<button type='submit' className='btn  btn-success'>Login <i className="fa-solid fa-lock-open"></i></button>
+										<button className='btn btn-secondary' onClick={clearHandler}>Clear <i className="fa-solid fa-rotate"></i></button>
 									</div>
 								</div>
 							</form>

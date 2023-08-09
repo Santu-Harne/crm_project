@@ -49,3 +49,9 @@ body {
 .navbar {
   background: linear-gradient(90deg, rgb(103, 103, 149), rgba(215, 118, 118, 0.694));
 }
+table.users-table :where(td, th) {
+  border: 1px dashed rgba(139, 135, 135, 0.676);
+}
+.status_value {
+  word-wrap: nowrap;
+}

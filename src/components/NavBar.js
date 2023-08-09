@@ -1,7 +1,17 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import toast from 'react-hot-toast'
+import { Link, useNavigate } from 'react-router-dom'
 
 const NavBar = () => {
+  const navigate = useNavigate()
+
+  const logoutHandler = () => {
+    if (window.confirm('Are you sure to log out?')) {
+      localStorage.removeItem('token')
+      toast.success('Logged out successfully')
+      window.location.href = '/login'
+    }
+  }
   return (
     <div>
       <nav className="navbar navbar-expand-lg">
@@ -19,13 +29,25 @@ const NavBar = () => {
                 <Link className='nav-link' to={'/user_register'}>Reg_User</Link>
               </li>
               <li className="nav-item">
+                <Link className='nav-link' to={'/admin/users_list'}>Usr_List</Link>
+              </li>
+              <li className="nav-item">
                 <Link className='nav-link' to={'/reset_password'}>Res_Password</Link>
               </li>
               <li className="nav-item">
                 <Link className='nav-link' to={'/opportunity'}>Opportunity</Link>
               </li>
               <li className="nav-item">
-                <Link className='nav-link' to={'/update_user'}>Update_User</Link>
+                <Link className='nav-link' to={'/update_user/user_0004'}>Update_User</Link>
+              </li>
+              <li className="nav-item">
+                <Link className='nav-link' to={'/admin/updateRoleReporting/user_0004'}>UpdBy_Admin</Link>
+              </li>
+              <li className="nav-item">
+                <Link className='nav-link' to={'/update_sales_person/Sp_0001'}>Update_SP</Link>
+              </li>
+              <li className="nav-item">
+                <button className='btn btn-secondary' onClick={logoutHandler}>Logout <i className="fa-solid fa-lock"></i></button>
               </li>
             </ul>
           </div>
