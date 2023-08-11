@@ -21,6 +21,7 @@ const StatusUpdate = () => {
     e.preventDefault()
     api.put(`/api/updateStatus/${userId}/${user.statusValue}`)
       .then(res => {
+        // console.log(res.data);
         toast.success('User Status updated successfully')
         navigate(`/admin/users_list/${adminId}`)
       }).catch(err => console.log(err))

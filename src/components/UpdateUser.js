@@ -35,7 +35,7 @@ const UpdateUser = () => {
         // console.log(res.data);
         toast.success('User data updated successfully')
         setUser(initialUser)
-        navigate(`/user_dashboard/${res.data.username}`)
+        navigate(`/user_dashboard/${res.data.userId}`)
       }).catch(err => toast.error(err.response.message))
   }
 

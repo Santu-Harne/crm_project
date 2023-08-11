@@ -47,8 +47,8 @@ const Login = () => {
 				setUser(initialState)
 				navigate(`/user_dashboard/${res.data.userId}`)
 			}).catch(error => {
-				// console.log(error.message);
-				toast.error('Error while login, Please try after some time!')
+				toast.error(error.response.data);
+				// toast.error('Error while login, Please try after some time!')
 			})
 	}
 	return (

@@ -45,9 +45,10 @@ const ResetPassword = () => {
     else {
       await api.put(`/api/updatePassword/${email}/${oldPassword}/${newPassword}`)
         .then(res => {
-          console.log(res.data);
+          // console.log(res.data);
           toast.success(res.data)
           setPassword(initialState)
+          localStorage.removeItem('token')
           navigate('/login')
         }).catch(err => console.log(err))
     }

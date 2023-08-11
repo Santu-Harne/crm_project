@@ -7,7 +7,7 @@ const initialState = { email: '', otp: '', newPassword: '', confirmPassword: '' 
 
 const ForgotPassword = () => {
 	const [userDetails, setUserDetails] = useState(initialState)
-	const [verified, setVerified] = useState(true)
+	const [verified, setVerified] = useState(false)
 
 	const navigate = useNavigate()
 
@@ -20,7 +20,7 @@ const ForgotPassword = () => {
 		axios.post(`/forget/forgetPassword/${userDetails.email}`)
 			.then(res => {
 				toast.success('Otp sent successfully')
-				console.log(res);
+				// console.log(res);
 			}).catch(err => toast.error(err.response.data))
 	}
 	const verifyHandler = () => {

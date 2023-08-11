@@ -58,7 +58,7 @@ const Opportunity = () => {
         oppId = oppRes.data.opportunityId
       }
       if (oppId) {
-        const oppSubRes = await api.post(`/api/app/saveOpportunitySub/${oppId}`, opportunitySub)
+        const oppSubRes = await api.post(`/app/saveOpportunitySub/${oppId}`, opportunitySub)
         console.log(oppSubRes);
         if (oppSubRes.status === 201) {
           toast.success('Opportunity Created Successfully');

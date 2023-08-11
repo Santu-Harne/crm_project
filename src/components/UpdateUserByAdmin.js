@@ -3,7 +3,7 @@ import toast from 'react-hot-toast'
 import api from '../util/api'
 import { useParams, useNavigate } from 'react-router-dom'
 
-const initialState = { role: '', reportingUsrName: '', reportingUsrId: '' }
+const initialState = { userName: '', role: '', reportingUsrId: '', reportingUsrName: '' }
 
 const UpdateUserByAdmin = () => {
   const [user, setUser] = useState(initialState)
@@ -17,9 +17,7 @@ const UpdateUserByAdmin = () => {
     const { name, value } = e.target
     setUser({ ...user, [name]: value })
     if (value !== 'SalesPerson') {
-      setReportingToUsers(extUsers.filter(item => {
-        return item.authorities.some(auth => auth.authority !== "SalesPerson");
-      }))
+      setReportingToUsers(extUsers.filter(item => item.role !== 'SalesPerson'))
     }
     else setReportingToUsers(extUsers)
   }
@@ -42,11 +40,11 @@ const UpdateUserByAdmin = () => {
       try {
         await api.get(`/api/getDtoById/${userId}`)
           .then(res => {
-            const { role, reportingUsrId, reportingUsrName } = res.data
-            setUser({ ...user, role, reportingUsrId, reportingUsrName })
+            const { role, userName, reportingUsrId, reportingUsrName } = res.data
+            setUser({ ...user, userName, role, reportingUsrId, reportingUsrName })
             // console.log(res.data);
-          }).catch(err => console.log(err.message))
-        await api.get('/api/getAllUsers')
+          }).catch(err => console.log(err))
+        await api.get('/api/getAllUsersNDtos')
           .then(res => {
             // console.log(res.data);
             setExtUsers(res.data)
@@ -69,6 +67,10 @@ const UpdateUserByAdmin = () => {
               <button className='btn btn-secondary' onClick={() => navigate(`/admin/users_list/${adminId}`)}>UsersList</button>
             </div>
             <div className="card-body">
+              <div className="form-group">
+                <label htmlFor="userName">User Name</label>
+                <input type="text" name="userName" id="userName" value={user.userName} className='form-control' readOnly />
+              </div>
               <div className="form-group ">
                 <label htmlFor="role">Role <span className='required'>*</span></label>
                 <select onChange={changeHandler} name="role" className="form-select" required>
@@ -89,7 +91,7 @@ const UpdateUserByAdmin = () => {
                   {
                     reportingToUsers && reportingToUsers.map(user => {
                       return (
-                        <option key={user.userId} value={user.userId}>{user.userName} -- {user.userId} -- {user.authorities[0].authority} </option>
+                        <option key={user.userId} value={user.userId}>{user.userName} -- {user.userId} -- {user.role} </option>
                       )
                     })
                   }

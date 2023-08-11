@@ -29,7 +29,7 @@ const NavBar = () => {
                 <Link className='nav-link' to={'/user_register'}>Reg_User</Link>
               </li>
               <li className="nav-item">
-                <Link className='nav-link' to={'/admin/users_list/user_0025'}>Usr_List</Link>
+                <Link className='nav-link' to={'/admin/users_list/user_0004'}>Usr_List</Link>
               </li>
               <li className="nav-item">
                 <Link className='nav-link' to={'/reset_password'}>Res_Password</Link>

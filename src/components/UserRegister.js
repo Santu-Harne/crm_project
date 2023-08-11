@@ -32,9 +32,7 @@ const UserRegister = () => {
       }
       else if (value !== 'SalesPerson') {
         setIsSalesPerson(false)
-        setReportingToUsers(extUsers.filter(item => {
-          return item.authorities.some(auth => auth.authority !== "SalesPerson");
-        }))
+        setReportingToUsers(extUsers.filter(item => item.role !== 'SalesPerson'))
       }
     }
     else setUser({ ...user, [name]: value })
@@ -106,7 +104,7 @@ const UserRegister = () => {
   useEffect(() => {
     try {
       const initialFetch = () => {
-        api.get('/api/getAllUsers')
+        api.get('/api/getAllUsersNDtos')
           .then(res => {
             // console.log(res.data);
             setExtUsers(res.data)
@@ -162,7 +160,7 @@ const UserRegister = () => {
                           {
                             reportingToUsers && reportingToUsers.map(user => {
                               return (
-                                <option key={user.userId} value={user.userId}>{user.userName} -- {user.userId} -- {user.authorities[0].authority}</option>
+                                <option key={user.userId} value={user.userId}>{user.userName} -- {user.userId} -- {user.role}</option>
                               )
                             })
                           }
