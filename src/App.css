@@ -49,11 +49,13 @@ body {
 .navbar {
   background: linear-gradient(90deg, rgb(103, 103, 149), rgba(215, 118, 118, 0.694));
 }
-.users-data {
-  height: 450px;
+.users-data,
+.opportunities-list {
+  /* height: 450px; */
+  height: min(auto, 450px);
   overflow: auto;
 }
-.users-data table :where(td, th) {
+:is(.users-data table, .opportunities-list table) :where(td, th) {
   border: 1px dashed rgba(139, 135, 135, 0.676);
-  /* padding: 10px; */
+  white-space: nowrap;
 }

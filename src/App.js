@@ -14,6 +14,7 @@ import UpdateUserByAdmin from './components/UpdateUserByAdmin';
 import UpdateSalesPerson from './components/UpdateSalesPerson';
 import UserList from './components/UserList';
 import StatusUpdate from './components/StatusUpdate';
+import OpportunityList from './components/OpportunityList';
 
 
 function App() {
@@ -36,6 +37,8 @@ function App() {
             <Route path='/admin/updateRoleReporting/:adminId/:userId' element={<UpdateUserByAdmin />} />
             <Route path='/admin/statusUpdate/:adminId/:userId' element={<StatusUpdate />} />
             <Route path='/reset_password' element={<ResetPassword />} />
+            <Route path='/opportunities_list' element={<OpportunityList />} />
+
           </Route>
         </Routes>
       </BrowserRouter>

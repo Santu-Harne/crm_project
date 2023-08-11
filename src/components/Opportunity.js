@@ -3,7 +3,7 @@ import api from './../util/api'
 import toast from 'react-hot-toast'
 
 const initialOpportunity = { opportunityName: '', opportunitySize: '' }
-const initialOpportunitySub = { opportunityCreatedDate: '', noOfInstallments: '', price: '', duration: '', currency: '', status: { statusValue: 'opportunity' } }
+const initialOpportunitySub = { opportunityCreatedDate: '', noOfInstallements: '', price: '', duration: '', currency: '', status: { statusValue: 'opportunity' } }
 
 const Opportunity = () => {
   const [contactId, setContactId] = useState('')
@@ -143,7 +143,7 @@ const Opportunity = () => {
                       </div>
                       <div className="col-md-6 mt-3">
                         <label htmlFor="noOfInstallments">No Of Installments <span className='required'>*</span></label>
-                        <input type="number" name="noOfInstallments" id="noOfInstallments" value={opportunitySub.noOfInstallments} onChange={opportunitySubHandler} className='form-control' required />
+                        <input type="number" name="noOfInstallements" id="noOfInstallements" value={opportunitySub.noOfInstallements} onChange={opportunitySubHandler} className='form-control' required />
                       </div>
                       <div className="col-md-6 mt-3">
                         <label htmlFor="opportunityCreatedDate">Opportunity Created Date <span className='required'>*</span></label>

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const initialState = {
 	email: 'santosh.283143@gmail.com',
-	password: 'Santosh@123'
+	password: 'Santosh1437$'
 }
 
 const Login = () => {

@@ -42,7 +42,7 @@ const UpdateUserByAdmin = () => {
           .then(res => {
             const { role, userName, reportingUsrId, reportingUsrName } = res.data
             setUser({ ...user, userName, role, reportingUsrId, reportingUsrName })
-            // console.log(res.data);
+            console.log(res.data);
           }).catch(err => console.log(err))
         await api.get('/api/getAllUsersNDtos')
           .then(res => {

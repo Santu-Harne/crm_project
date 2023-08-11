@@ -26,25 +26,28 @@ const NavBar = () => {
                 <Link className='nav-link' to={'/login'}>Login</Link>
               </li>
               <li className="nav-item">
+                <Link className='nav-link' to={'/admin/users_list/user_0006'}>Usr_List</Link>
+              </li>
+              <li className="nav-item">
                 <Link className='nav-link' to={'/user_register'}>Reg_User</Link>
               </li>
               <li className="nav-item">
-                <Link className='nav-link' to={'/admin/users_list/user_0004'}>Usr_List</Link>
+                <Link className='nav-link' to={'/update_user/user_0006'}>Update_User</Link>
               </li>
               <li className="nav-item">
                 <Link className='nav-link' to={'/reset_password'}>Res_Password</Link>
               </li>
               <li className="nav-item">
-                <Link className='nav-link' to={'/opportunity'}>Opportunity</Link>
-              </li>
-              <li className="nav-item">
-                <Link className='nav-link' to={'/update_user/user_0004'}>Update_User</Link>
-              </li>
-              <li className="nav-item">
-                <Link className='nav-link' to={'/admin/updateRoleReporting/user_0025/user_0004'}>UpdBy_Admin</Link>
+                <Link className='nav-link' to={'/admin/updateRoleReporting/user_0025/user_0006'}>UpdBy_Admin</Link>
               </li>
               <li className="nav-item">
                 <Link className='nav-link' to={'/update_sales_person/Sp_0001'}>Update_SP</Link>
+              </li>
+              <li className="nav-item">
+                <Link className='nav-link' to={'/opportunity'}>Create_Opp</Link>
+              </li>
+              <li className="nav-item">
+                <Link className='nav-link' to={'/opportunities_list'}>Opp_List</Link>
               </li>
               <li className="nav-item">
                 <button className='btn btn-secondary' onClick={logoutHandler}>Logout <i className="fa-solid fa-lock"></i></button>
