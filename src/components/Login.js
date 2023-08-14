@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 
 const initialState = {
 	email: 'santosh.283143@gmail.com',
@@ -46,6 +46,7 @@ const Login = () => {
 				toast.success('Login successful')
 				setUser(initialState)
 				navigate(`/user_dashboard/${res.data.userId}`)
+				// Navigate({ to: '/dashboard', state: `${res.data.username}` })
 			}).catch(error => {
 				toast.error(error.response.data);
 				// toast.error('Error while login, Please try after some time!')

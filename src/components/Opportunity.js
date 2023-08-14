@@ -50,19 +50,47 @@ const Opportunity = () => {
   }
   const submitHandler = async (e) => {
     e.preventDefault()
+    let oppId = null;
+    // opportunity
+    // try {
+    //   const oppRes = await api.post(`/app/saveOpportunity/${contactId}/${offeringId}`, opportunity)
+    //   // console.log(oppRes);
+    //   if (oppRes.status === 201) {
+    //     oppId = oppRes.data.opportunityId
+    //   }
+
+    //   if (oppId) {
+    //     const oppSubRes = await api.post(`/app/saveOpportunitySub/${oppId}`, opportunitySub)
+    //     // console.log(oppSubRes);
+    //     if (oppSubRes.status === 201) {
+    //       toast.success('Opportunity Created Successfully');
+    //       oppId = null
+    //       setOpportunity(initialOpportunity)
+    //       setOpportunitySub(initialOpportunitySub)
+    //       setContactId('')
+    //       setOfferingId('')
+    //     }
+    //   }
+    // } catch (error) {
+    //   console.log(error.message);
+    // }
     try {
-      let oppId = null;
       const oppRes = await api.post(`/app/saveOpportunity/${contactId}/${offeringId}`, opportunity)
-      console.log(oppRes);
+      // console.log(oppRes);
       if (oppRes.status === 201) {
         oppId = oppRes.data.opportunityId
       }
+    } catch (error) {
+      console.log(error.message);
+    }
+    // opportunitySub
+    try {
       if (oppId) {
         const oppSubRes = await api.post(`/app/saveOpportunitySub/${oppId}`, opportunitySub)
-        console.log(oppSubRes);
+        // console.log(oppSubRes);
         if (oppSubRes.status === 201) {
           toast.success('Opportunity Created Successfully');
-          oppId = ''
+          oppId = null
           setOpportunity(initialOpportunity)
           setOpportunitySub(initialOpportunitySub)
           setContactId('')

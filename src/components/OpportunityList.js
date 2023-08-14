@@ -13,7 +13,7 @@ const OpportunityList = () => {
     for (let i = 0; i < opportunities.length; i++) {
       allOpp[i] = { ...opportunities[i], ...opportunitySub[i] }
     }
-    // console.log(allOpp);
+    console.log(allOpp);
   }
   useEffect(() => {
     const initialFetch = async () => {
@@ -49,6 +49,7 @@ const OpportunityList = () => {
                   (<table className="table table-hover">
                     <thead>
                       <tr>
+                        <th>Sl.No</th>
                         <th>OppName</th>
                         <th>OppSize</th>
                         <th>ContactName</th>
@@ -56,7 +57,7 @@ const OpportunityList = () => {
                         <th>OfferingName</th>
                         <th>OffValid</th>
                         <th>Opp_created</th>
-                        <th>Opp Type</th>
+                        {/* <th>Opp Type</th> */}
                         <th>Installments</th>
                         <th>Price</th>
                         <th>Duration</th>
@@ -77,9 +78,10 @@ const OpportunityList = () => {
                         )
                       })} */}
                       {
-                        allOpp && allOpp.map(opp => {
+                        allOpp && allOpp.map((opp, index) => {
                           return (
                             <tr key={opp.opportunityId}>
+                              <td>{opp.opportunityId}</td>
                               <td>{opp.opportunityName}</td>
                               <td>{opp.opportunitySize}</td>
                               <td>{opp.contact.firstName} {opp.contact.lastName}</td>
@@ -87,7 +89,7 @@ const OpportunityList = () => {
                               <td>{opp.offering.offeringName}</td>
                               <td>{opp.offering.validTillDate}</td>
                               <td>{opp.opportunityCreatedDate}</td>
-                              <td>{opp.status.statusValue}</td>
+                              {/* <td>{opp.status.statusValue}</td> */}
                               <td>{opp.noOfInstallements}</td>
                               <td>{opp.price}</td>
                               <td>{opp.duration}</td>

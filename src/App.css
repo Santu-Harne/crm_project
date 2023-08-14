@@ -52,7 +52,7 @@ body {
 .users-data,
 .opportunities-list {
   /* height: 450px; */
-  height: min(auto, 450px);
+  height: max(200px, 450px);
   overflow: auto;
 }
 :is(.users-data table, .opportunities-list table) :where(td, th) {
