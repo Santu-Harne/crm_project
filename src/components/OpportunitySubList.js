@@ -3,11 +3,17 @@ import { useNavigate, useParams, useLocation } from 'react-router-dom'
 import api from '../util/api'
 
 const OpportunitySubList = () => {
+  const [oppSubId, setOppSubId] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
   const [oppSubList, setOppSubList] = useState(null)
+
   const { state } = useLocation()
   const navigate = useNavigate()
 
+
+  const changeHandler = (e) => {
+    setOppSubId(e.target.value)
+  }
   useEffect(() => {
     const initialFetch = async () => {
       await api.get(`/app/getAllOpportunitySubByOpportunity/${state.oppId}`)
@@ -26,13 +32,17 @@ const OpportunitySubList = () => {
           <div className="card mt-3">
             <div className="card-header d-flex justify-content-between align-items-center">
               <h2 className="text-info">OpportunitySub List</h2>
-              <button className='btn btn-warning' onClick={() => navigate(`/opportunities_list`)}>Opp_List</button>
+              <div>
+                <button className='btn btn-secondary btn-sm' onClick={() => { if (oppSubId) navigate(`/oppSub_update`, { state: { oppId: state.oppId, oppSubId } }); else { alert('Please select opportunitySub to edit!') } }}>Edit</button>
+                <button className='ms-3 btn btn-warning btn-sm' onClick={() => navigate(`/opportunities_list`)}>Opp_List</button>
+              </div>
             </div>
             <div className="card-body oppSub-table">
               {isLoading ? (<h3 >Loading... <i className="fa-solid fa-spinner fa-spin-pulse"></i></h3>) : (
                 <table className='table table-hover'>
                   <thead>
                     <tr>
+                      <th>Select</th>
                       <th>Sl.No</th>
                       <th>OppCreatedDate</th>
                       <th>No.Of Installments</th>
@@ -40,13 +50,15 @@ const OpportunitySubList = () => {
                       <th>Duration</th>
                       <th>Currency</th>
                       <th>Status Value</th>
-                      <th>Update</th>
                     </tr>
                   </thead>
                   <tbody>
                     {oppSubList.map((oppSub, index) => {
                       return (
                         <tr key={oppSub.opportunitySubId}>
+                          <td>
+                            <input type="radio" value={oppSub.opportunitySubId} onChange={changeHandler} name="oppSub_select" id="oppSub_select" />
+                          </td>
                           <td>{index + 1}</td>
                           <td>{oppSub.opportunityCreatedDate}</td>
                           <td>{oppSub.noOfInstallements}</td>
@@ -54,7 +66,6 @@ const OpportunitySubList = () => {
                           <td>{oppSub.duration}</td>
                           <td>{oppSub.currency}</td>
                           <td>{oppSub.status.statusValue}</td>
-                          <td className='text-center'><button className='btn btn-secondary btn-sm' onClick={() => navigate(`/oppSub_update`, { state: { oppId: state.oppId, oppSubId: oppSub.opportunitySubId } })}>Edit</button></td>
                         </tr>
                       )
                     })}

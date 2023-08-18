@@ -11,7 +11,6 @@ const OpportunityList = () => {
 
   const changeHandler = (e) => {
     setOppId(e.target.value)
-    console.log(e.target.value);
   }
 
   useEffect(() => {
@@ -36,7 +35,10 @@ const OpportunityList = () => {
           <div className="card mt-3">
             <div className="card-header d-flex justify-content-between align-items-center">
               <h2 className="text-info">Opportunity List</h2>
-              <button type='button' className='btn btn-warning btn-sm' onClick={() => { if (oppId) navigate(`/update_opportunity`, { state: { oppId: oppId } }); else { alert('Please select opportunity to edit!') } }}>Edit</button>
+              <div>
+                <button type='button' className='btn btn-warning btn-sm' onClick={() => { if (oppId) navigate(`/opportunitySub_list`, { state: { oppId } }); else { alert('Please select opportunity to see OppSub list!') } }}>SubList</button>
+                <button type='button' className='ms-3 btn btn-warning btn-sm' onClick={() => { if (oppId) navigate(`/update_opportunity`, { state: { oppId } }); else { alert('Please select opportunity to edit!') } }}>Edit Opportunity</button>
+              </div>
             </div>
             <div className="card-body opportunities-list">
               {
@@ -52,7 +54,6 @@ const OpportunityList = () => {
                         <th>ContactEmail</th>
                         <th>OfferingName</th>
                         <th>OffValid</th>
-                        <th>OppSub</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -68,9 +69,6 @@ const OpportunityList = () => {
                               <td>{opp.contact.email}</td>
                               <td>{opp.offering.offeringName}</td>
                               <td>{opp.offering.validTillDate}</td>
-                              <td>
-                                <button type='button' className='btn btn-warning btn-sm' onClick={() => navigate(`/opportunitySub_list`, { state: { oppId: opp.opportunityId } })}>SubList</button>
-                              </td>
                             </tr>
                           )
                         })

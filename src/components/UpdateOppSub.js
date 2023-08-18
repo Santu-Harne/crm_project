@@ -46,8 +46,8 @@ const UpdateOppSub = () => {
       api.get(`/app/getOpportunitySub/${oppSubId}`)
         .then(res => {
           // console.log(res.data);
-          const { noOfInstallements, price, currency } = res.data
-          setOpportunitySub({ ...opportunitySub, noOfInstallements, price, currency })
+          const { noOfInstallements, price, duration, currency } = res.data
+          setOpportunitySub({ ...opportunitySub, noOfInstallements, price, duration, currency })
           setIsLoading(false)
         }).catch(err => console.log(err))
     }
@@ -75,12 +75,12 @@ const UpdateOppSub = () => {
                     </div>
                     <div className="form-group mt-3">
                       <label htmlFor="duration">Duration <span className='required'>*</span></label>
-                      <input type="date" min={getCurrentDate()} name="duration" id="duration" value={opportunitySub.duration} onChange={opportunitySubHandler} className='form-control' required />
+                      <input type="date" min={getCurrentDate()} name="duration" id="duration" value={opportunitySub.duration ? opportunitySub.duration : getCurrentDate()} onChange={opportunitySubHandler} className='form-control' required />
                     </div>
                     <div className="form-group mt-3">
                       <label htmlFor="currency">Currency <span className='required'>*</span></label>
                       <select className='form-control' name="currency" id="currency" onChange={opportunitySubHandler} required>
-                        <option value="" hidden>{opportunitySub.currency}</option>
+                        <option value={opportunitySub.currency} hidden>{opportunitySub.currency}</option>
                         <option value="₹ Indian Rupees">₹ Indian Rupees</option>
                         <option value="$ US Dollar">$ US Dollar</option>
                         <option value="£ British Pound">£ British Pound</option>
