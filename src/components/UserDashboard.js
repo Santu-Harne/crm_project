@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import api from '../util/api'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import AdminDashboard from './Dashboards/AdminDashboard'
 import MarketingManagerDashboard from './Dashboards/MarketingManagerDashboard'
@@ -20,12 +20,13 @@ const UserDashboard = () => {
   const [isSupportingManager, setIsSupportingManager] = useState(false)
   const [isRestrictedUser, setIsRestrictedUser] = useState(false)
 
-  const { userId } = useParams()
+  // const { userId } = useParams()
+  const { state } = useLocation()
   const navigate = useNavigate()
 
   useEffect(() => {
     const initialFetch = async () => {
-      await api.get(`/api/getDtoById/${userId}`)
+      await api.get(`/api/getDtoById/${state.userId}`)
         .then(res => {
           setCurrentUser(res.data)
           if (res.data.role === 'Administrator') setIsAdmin(true)

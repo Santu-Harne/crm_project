@@ -30,18 +30,18 @@ function App() {
           <Route path='/forgot_password' element={<ForgotPassword />} />
           <Route element={<ProtectedRoute />}>
             <Route path='/' element={<Login />} />
-            <Route path='/user_dashboard/:userId' element={<UserDashboard />} />
+            <Route path='/user_dashboard' element={<UserDashboard />} />
             <Route path='/admin/users_list/:adminId' element={<UserList />} />
             <Route path='/user_register' element={<UserRegister />} />
             <Route path='/update_sales_person/:sp_id' element={<UpdateSalesPerson />} />
-            <Route path='/update_opportunity/:opportunityId' element={<UpdateOpportunity />} />
-            <Route path='/oppSub_update/:oppId/:oppSubId' element={<UpdateOppSub />} />
+            <Route path='/update_opportunity' element={<UpdateOpportunity />} />
+            <Route path='/oppSub_update' element={<UpdateOppSub />} />
             <Route path='/update_user/:userId' element={<UpdateUser />} />
             <Route path='/admin/updateRoleReporting/:adminId/:userId' element={<UpdateUserByAdmin />} />
             <Route path='/admin/statusUpdate/:adminId/:userId' element={<StatusUpdate />} />
             <Route path='/reset_password' element={<ResetPassword />} />
             <Route path='/opportunities_list' element={<OpportunityList />} />
-            <Route path='/opportunitySub_list/:oppId' element={<OpportunitySubList />} />
+            <Route path='/opportunitySub_list' element={<OpportunitySubList />} />
           </Route>
         </Routes>
       </Router>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import api from '../util/api'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import toast from 'react-hot-toast'
 
 const initialOpportunitySub = { noOfInstallements: '', price: '', duration: '', currency: '' }
@@ -9,7 +9,8 @@ const UpdateOppSub = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [opportunitySub, setOpportunitySub] = useState(initialOpportunitySub)
 
-  const { oppId, oppSubId } = useParams()
+  const { state } = useLocation()
+  const { oppId, oppSubId } = state
   const navigate = useNavigate()
 
   const getCurrentDate = () => {
@@ -34,10 +35,10 @@ const UpdateOppSub = () => {
     e.preventDefault()
     api.put(`/app/latestUpdate/${oppSubId}/${oppId}`, opportunitySub)
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         toast.success('OpportunitySub updated successfully')
-        navigate(`/opportunitySub_list/${oppId}`)
         setOpportunitySub(initialOpportunitySub)
+        navigate(`/opportunitySub_list`, { state: { oppId: oppId } })
       }).catch(err => console.log(err))
   }
   useEffect(() => {
@@ -45,7 +46,7 @@ const UpdateOppSub = () => {
       api.get(`/app/getOpportunitySub/${oppSubId}`)
         .then(res => {
           // console.log(res.data);
-          const { noOfInstallements, price, duration, currency } = res.data
+          const { noOfInstallements, price, currency } = res.data
           setOpportunitySub({ ...opportunitySub, noOfInstallements, price, currency })
           setIsLoading(false)
         }).catch(err => console.log(err))
@@ -79,7 +80,7 @@ const UpdateOppSub = () => {
                     <div className="form-group mt-3">
                       <label htmlFor="currency">Currency <span className='required'>*</span></label>
                       <select className='form-control' name="currency" id="currency" onChange={opportunitySubHandler} required>
-                        <option value="">Select</option>
+                        <option value="" hidden>{opportunitySub.currency}</option>
                         <option value="₹ Indian Rupees">₹ Indian Rupees</option>
                         <option value="$ US Dollar">$ US Dollar</option>
                         <option value="£ British Pound">£ British Pound</option>

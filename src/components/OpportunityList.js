@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback, useMemo } from 'react'
 import api from '../util/api'
 import { useNavigate, Navigate } from 'react-router-dom'
 
 const OpportunityList = () => {
-  const allOpp = []
   const [oppId, setOppId] = useState(null)
   const [opportunities, setOpportunities] = useState(null)
-  const [opportunitySub, setOpportunitySub] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
 
   const navigate = useNavigate()
@@ -16,12 +14,6 @@ const OpportunityList = () => {
     console.log(e.target.value);
   }
 
-  // if (opportunities && opportunitySub) {
-  //   for (let i = 0; i < opportunities.length; i++) {
-  //     allOpp[i] = { ...opportunities[i], ...opportunitySub[i] }
-  //   }
-  //   // console.log(allOpp);
-  // }
   useEffect(() => {
     const initialFetch = async () => {
       try {
@@ -44,6 +36,7 @@ const OpportunityList = () => {
           <div className="card mt-3">
             <div className="card-header d-flex justify-content-between align-items-center">
               <h2 className="text-info">Opportunity List</h2>
+              <button type='button' className='btn btn-warning btn-sm' onClick={() => { if (oppId) navigate(`/update_opportunity`, { state: { oppId: oppId } }); else { alert('Please select opportunity to edit!') } }}>Edit</button>
             </div>
             <div className="card-body opportunities-list">
               {
@@ -59,7 +52,6 @@ const OpportunityList = () => {
                         <th>ContactEmail</th>
                         <th>OfferingName</th>
                         <th>OffValid</th>
-                        <th>UpdateOpp</th>
                         <th>OppSub</th>
                       </tr>
                     </thead>
@@ -77,10 +69,7 @@ const OpportunityList = () => {
                               <td>{opp.offering.offeringName}</td>
                               <td>{opp.offering.validTillDate}</td>
                               <td>
-                                <button type='button' className='btn btn-warning btn-sm' onClick={() => navigate(`/update_opportunity/${opp.opportunityId}`)}>Edit</button>
-                              </td>
-                              <td>
-                                <button type='button' className='btn btn-warning btn-sm' onClick={() => navigate(`/opportunitySub_list/${opp.opportunityId}`)}>SubList</button>
+                                <button type='button' className='btn btn-warning btn-sm' onClick={() => navigate(`/opportunitySub_list`, { state: { oppId: opp.opportunityId } })}>SubList</button>
                               </td>
                             </tr>
                           )

@@ -45,11 +45,11 @@ const Login = () => {
 				localStorage.setItem('token', res.data.jwtToken)
 				toast.success('Login successful')
 				setUser(initialState)
-				navigate(`/user_dashboard/${res.data.userId}`)
+				navigate(`/user_dashboard`, { state: { userId: res.data.userId } })
 				// Navigate({ to: '/dashboard', state: `${res.data.username}` })
 			}).catch(error => {
-				toast.error(error.response.data);
-				// toast.error('Error while login, Please try after some time!')
+				// toast.error(error.response.data);
+				toast.error('Error while login, Please try after some time!')
 			})
 	}
 	return (

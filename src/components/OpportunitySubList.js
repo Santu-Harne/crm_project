@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useLocation } from 'react-router-dom'
 import api from '../util/api'
 
 const OpportunitySubList = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [oppSubList, setOppSubList] = useState(null)
-  const { oppId } = useParams()
+  const { state } = useLocation()
   const navigate = useNavigate()
 
   useEffect(() => {
     const initialFetch = async () => {
-      await api.get(`/app/getAllOpportunitySubByOpportunity/${oppId}`)
+      await api.get(`/app/getAllOpportunitySubByOpportunity/${state.oppId}`)
         .then(res => {
           // console.log(res.data);
           setOppSubList(res.data);
@@ -54,7 +54,7 @@ const OpportunitySubList = () => {
                           <td>{oppSub.duration}</td>
                           <td>{oppSub.currency}</td>
                           <td>{oppSub.status.statusValue}</td>
-                          <td className='text-center'><button className='btn btn-secondary btn-sm' onClick={() => navigate(`/oppSub_update/${oppId}/${oppSub.opportunitySubId}`)}>Edit</button></td>
+                          <td className='text-center'><button className='btn btn-secondary btn-sm' onClick={() => navigate(`/oppSub_update`, { state: { oppId: state.oppId, oppSubId: oppSub.opportunitySubId } })}>Edit</button></td>
                         </tr>
                       )
                     })}

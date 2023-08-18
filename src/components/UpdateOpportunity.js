@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import api from '../util/api'
 import toast from 'react-hot-toast'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, useLocation } from 'react-router-dom'
 
 const initialOpportunity = { opportunityName: '', opportunitySize: '' }
 
@@ -12,7 +12,8 @@ const UpdateOpportunity = () => {
   const [offeringId, setOfferingId] = useState(null)
   const [opportunity, setOpportunity] = useState(initialOpportunity)
 
-  const { opportunityId } = useParams()
+  const { state } = useLocation()
+  const { oppId } = state
   const navigate = useNavigate()
 
   const opportunityHandler = (e) => {
@@ -28,7 +29,7 @@ const UpdateOpportunity = () => {
   const submitHandler = async (e) => {
     e.preventDefault()
     try {
-      api.put(`/app/${opportunityId}/${contactId}/${offeringId}`, opportunity)
+      api.put(`/app/${oppId}/${contactId}/${offeringId}`, opportunity)
         .then(res => {
           // console.log(res.data);
           toast.success('Opportunity details updated successfully')
@@ -42,7 +43,7 @@ const UpdateOpportunity = () => {
   useEffect(() => {
     try {
       const initialFetch = async () => {
-        api.get(`/app/${opportunityId}`)
+        api.get(`/app/${oppId}`)
           .then(res => {
             // console.log(res.data);
             setContactId(res.data.contact.contactId)

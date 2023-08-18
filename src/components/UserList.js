@@ -26,7 +26,7 @@ const UserList = () => {
     <div className='mx-3'>
       <div className="row">
         <div className="card p-0 mt-3">
-          <div className="card-header d-flex justify-content-between align-items-center">
+          <div className="card-header d-flex justify-content-between align-items-center flex-wrap">
             <h2 className="text-info">User List</h2>
             <button className='btn btn-secondary' onClick={() => navigate(`/user_dashboard/${adminId}`)}>Admin Dashboard</button>
           </div>
