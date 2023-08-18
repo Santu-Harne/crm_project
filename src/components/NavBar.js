@@ -44,10 +44,13 @@ const NavBar = () => {
                 <Link className='nav-link' to={'/update_sales_person/Sp_0001'}>Update_SP</Link>
               </li>
               <li className="nav-item">
-                <Link className='nav-link' to={'/opportunity'}>Create_Opp</Link>
+                <Link className='nav-link' to={'/opportunities_list'}>Opp_List</Link>
               </li>
               <li className="nav-item">
-                <Link className='nav-link' to={'/opportunities_list'}>Opp_List</Link>
+                <Link className='nav-link' to={'/update_opportunity/opportunity_01'}>Update_Opp</Link>
+              </li>
+              <li className="nav-item">
+                <Link className='nav-link' to={'/opportunitySub_list/opportunity_06'}>OppSub_List</Link>
               </li>
               <li className="nav-item">
                 <button className='btn btn-secondary' onClick={logoutHandler}>Logout <i className="fa-solid fa-lock"></i></button>
