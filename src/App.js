@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import './App.css';
 import { Toaster } from 'react-hot-toast';
 import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom';
@@ -20,6 +21,10 @@ import UpdateOppSub from './components/UpdateOppSub';
 
 
 function App() {
+
+  useEffect(() => {
+
+  }, [])
   return (
     <div>
       <Router>

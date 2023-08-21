@@ -45,7 +45,7 @@ const UpdateOppSub = () => {
     const initialFetch = async () => {
       api.get(`/app/getOpportunitySub/${oppSubId}`)
         .then(res => {
-          // console.log(res.data);
+          console.log(res.data);
           const { noOfInstallements, price, duration, currency } = res.data
           setOpportunitySub({ ...opportunitySub, noOfInstallements, price, duration, currency })
           setIsLoading(false)
@@ -80,7 +80,9 @@ const UpdateOppSub = () => {
                     <div className="form-group mt-3">
                       <label htmlFor="currency">Currency <span className='required'>*</span></label>
                       <select className='form-control' name="currency" id="currency" onChange={opportunitySubHandler} required>
-                        <option value={opportunitySub.currency} hidden>{opportunitySub.currency}</option>
+                        {
+                          opportunitySub.currency ? <option value={opportunitySub.currency} hidden>{opportunitySub.currency}</option> : <option value="" hidden>Select</option>
+                        }
                         <option value="₹ Indian Rupees">₹ Indian Rupees</option>
                         <option value="$ US Dollar">$ US Dollar</option>
                         <option value="£ British Pound">£ British Pound</option>

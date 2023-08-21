@@ -59,7 +59,8 @@ const OpportunitySubList = () => {
                           <td>
                             <input type="radio" value={oppSub.opportunitySubId} onChange={changeHandler} name="oppSub_select" id="oppSub_select" />
                           </td>
-                          <td>{index + 1}</td>
+                          {/* <td>{index + 1}</td> */}
+                          <td>{oppSub.opportunitySubId}</td>
                           <td>{oppSub.opportunityCreatedDate}</td>
                           <td>{oppSub.noOfInstallements}</td>
                           <td>{oppSub.price}</td>
