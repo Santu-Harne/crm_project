@@ -18,6 +18,7 @@ import OpportunityList from './components/OpportunityList';
 import OpportunitySubList from './components/OpportunitySubList';
 import UpdateOpportunity from './components/UpdateOpportunity';
 import UpdateOppSub from './components/UpdateOppSub';
+import SalesPersonList from './components/SalesPersonList';
 
 
 function App() {
@@ -38,7 +39,8 @@ function App() {
             <Route path='/user_dashboard' element={<UserDashboard />} />
             <Route path='/admin/users_list/:adminId' element={<UserList />} />
             <Route path='/user_register' element={<UserRegister />} />
-            <Route path='/update_sales_person/:sp_id' element={<UpdateSalesPerson />} />
+            <Route path='/salesPersons_list' element={<SalesPersonList />} />
+            <Route path='/update_sales_person' element={<UpdateSalesPerson />} />
             <Route path='/update_opportunity' element={<UpdateOpportunity />} />
             <Route path='/oppSub_update' element={<UpdateOppSub />} />
             <Route path='/update_user/:userId' element={<UpdateUser />} />

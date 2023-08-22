@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import api from '../util/api'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import toast from 'react-hot-toast'
 
 
-const initialState = { target: '', frequency: '', amount: '', currency: '', duration: '' }
+const initialState = { name: '', target: '', frequency: '', amount: '', currency: '', duration: '' }
 
 const UpdateSalesPerson = () => {
   const [sales_person_details, setSales_person_details] = useState(initialState)
   const [isLoading, setIsLoading] = useState(true)
 
-  const { sp_id } = useParams()
+  const { state } = useLocation()
   const navigate = useNavigate()
 
 
@@ -24,26 +24,23 @@ const UpdateSalesPerson = () => {
   const submitHandler = async (e) => {
     const { target, frequency, amount, currency, duration } = sales_person_details
     e.preventDefault()
-    await api.put(`/app/updateSalesperson/${sp_id}`, { target, frequency, amount, currency, duration })
+    await api.put(`/app/updateSalesperson/${state.spId}`, { target, frequency, amount, currency, duration })
       .then(res => {
         // console.log(res.data);
         toast.success('Salesperson details updated successfully')
         setSales_person_details(initialState)
+        navigate('/salesPersons_list')
       }).catch(err => console.log(err))
 
   }
   useEffect(() => {
     const initialFetch = async () => {
-      await api.get(`/app/getSalesPerson/${sp_id}`)
+      await api.get(`/app/getSalesPerson/${state.spId}`)
         .then(res => {
           // console.log(res.data);
-          setSales_person_details(res.data)
+          const { user, target, frequency, amount, currency, duration } = res.data
+          setSales_person_details({ ...sales_person_details, name: user.userName, target, frequency, amount, currency, duration })
           setIsLoading(false)
-        }).catch(err => console.log(err))
-
-      await api.get(`/app/getAllSalesPerson`)
-        .then(res => {
-          console.table(res.data);
         }).catch(err => console.log(err))
     }
     initialFetch()
@@ -52,12 +49,16 @@ const UpdateSalesPerson = () => {
     <div className='container'>
       <div className="row justify-content-center">
         <div className="col-md-6">
-          <div className="card mt-5">
+          <div className="card mt-3">
             <div className="card-header"><h2 className='text-info'>Update Sales Person</h2></div>
             <div className="card-body">
               {
                 isLoading ? (<h3 >Loading... <i className="fa-solid fa-spinner fa-spin"></i></h3>) :
                   (<form onSubmit={submitHandler}>
+                    <div className="form-group">
+                      <label htmlFor="target">Name</label>
+                      <input type="text" value={sales_person_details.name} name="name" id="name" className='form-control' readOnly />
+                    </div>
                     <div className="form-group">
                       <label htmlFor="target">Target</label>
                       <input type="text" value={sales_person_details.target} onChange={changeHandler} name="target" id="target" className='form-control' />

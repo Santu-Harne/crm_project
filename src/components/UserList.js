@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import api from '../util/api'
 import { useParams, useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
+import axios from 'axios'
 
 
 const UserList = () => {
@@ -12,16 +13,14 @@ const UserList = () => {
   const { adminId, userId } = useParams()
 
   useEffect(() => {
-    const initialFetch = async () => {
-      await api.get('/api/getAllUsersNDtos')
-        .then(res => {
-          // console.log(res.data);
-          setUsers(res.data)
-          setIsLoading(false)
-        }).catch(err => console.log(err))
-    }
-    initialFetch()
+    api.get('/api/getAllUsersNDtos')
+      .then(res => {
+        // console.log(res.data);
+        setUsers(res.data)
+        setIsLoading(false)
+      }).catch(err => console.log(err))
   }, [])
+
   return (
     <div className='mx-3'>
       <div className="row">
@@ -35,7 +34,7 @@ const UserList = () => {
               <table className="table table-hover">
                 <thead>
                   <tr >
-                    <th>User Name</th>
+                    <th>User </th>
                     <th>Email</th>
                     <th>Mobile No</th>
                     <th>Alt Mobile</th>

@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react'
 import api from '../util/api'
 import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import toast from 'react-hot-toast'
+import axios from 'axios'
+import CurrencyList from 'currency-list'
 
 const initialOpportunitySub = { noOfInstallements: '', price: '', duration: '', currency: '' }
 
 const UpdateOppSub = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [opportunitySub, setOpportunitySub] = useState(initialOpportunitySub)
-
+  const [currencies, setCurrencies] = useState(null)
   const { state } = useLocation()
   const { oppId, oppSubId } = state
   const navigate = useNavigate()
@@ -45,13 +47,20 @@ const UpdateOppSub = () => {
     const initialFetch = async () => {
       api.get(`/app/getOpportunitySub/${oppSubId}`)
         .then(res => {
-          console.log(res.data);
+          // console.log(res.data);
           const { noOfInstallements, price, duration, currency } = res.data
           setOpportunitySub({ ...opportunitySub, noOfInstallements, price, duration, currency })
           setIsLoading(false)
         }).catch(err => console.log(err))
+
+      // console.log(CurrencyList.getAll('en_US'))
     }
     initialFetch()
+    // axios.get('https://restcountries.com/v3.1/all')
+    //   .then(res => {
+    //     console.log(res);
+
+    //   }).catch(err => console.log(err))
   }, [])
   return (
     <div className='container'>

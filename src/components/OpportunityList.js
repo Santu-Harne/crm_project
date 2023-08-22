@@ -18,7 +18,7 @@ const OpportunityList = () => {
       try {
         await api.get('/app/getAllOpportunities')
           .then(res => {
-            // console.log(`Opportunities`, res.data);
+            console.log(res.data);
             setOpportunities(res.data)
             setIsLoading(false)
           }).catch(err => console.log(err))
