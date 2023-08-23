@@ -1,9 +1,8 @@
 import React from 'react'
 import toast from 'react-hot-toast'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const NavBar = () => {
-  const navigate = useNavigate()
 
   const logoutHandler = () => {
     if (window.confirm('Are you sure to log out?')) {
@@ -53,7 +52,7 @@ const NavBar = () => {
                 <Link className='nav-link' to={'/opportunitySub_list/opportunity_06'}>OppSub_List</Link>
               </li>
               <li className="nav-item">
-                <button className='btn btn-secondary' onClick={logoutHandler}>Logout <i className="fa-solid fa-lock"></i></button>
+                <button className='btn btn-secondary rounded-circle' onClick={logoutHandler}><i className="fa-solid fa-power-off"></i></button>
               </li>
             </ul>
           </div>

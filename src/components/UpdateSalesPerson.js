@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import api from '../util/api'
-import { useParams, useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import toast from 'react-hot-toast'
 
 

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import toast from 'react-hot-toast';
-import { useNavigate, Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const initialState = {
 	email: 'santosh.283143@gmail.com',

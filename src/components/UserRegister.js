@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import api from './../util/api'
 import toast from 'react-hot-toast';
-import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
 
 const initialUser = {
   userName: '', email: '', password: '', role: { statusValue: '' }, mobileNo: '', altMobileNo: ''
 }
-const initialSalesPerson = { target: '', frequency: '', amount: '', currency: '', duration: '' }
+const initialSalesPerson = { maxTarget: '', frequency: '', threshold: '', currency: '', duration: '' }
 
 
 const UserRegister = () => {
@@ -17,8 +15,6 @@ const UserRegister = () => {
   const [extUsers, setExtUsers] = useState([])
   const [reportingTo, setReportingTo] = useState('')
   const [reportingToUsers, setReportingToUsers] = useState([])
-
-  const navigate = useNavigate()
 
   // function to update user details in state
   const changeHandler = (e) => {
@@ -69,15 +65,16 @@ const UserRegister = () => {
         // console.log(UserId);
       }
       if (isSalesPerson) {
-        const salesPersonResponse = await api.post(`/app/saveSalesPerson/${UserId}`, SalesPerson)
-        // console.log(salesPersonResponse.data);
+        await api.post(`/app/saveSalesPerson/${UserId}`, SalesPerson)
+          .then(res => {
+            console.log(res.data);
+          })
       }
       toast.success('User registered successfully')
       setIsSalesPerson(false)
       setSalesPerson(initialSalesPerson)
       setUser(initialUser)
       setReportingTo("")
-      window.location.reload()
     } catch (error) {
       console.log(error.message);
     }
@@ -183,39 +180,61 @@ const UserRegister = () => {
                       </div>
                     </div>
                     {
-                      isSalesPerson ? (
+                      isSalesPerson && (
                         <>
                           <div className="col-md-6">
                             <div className="form-group mt-3">
-                              <label htmlFor="target">target</label>
-                              <input type="text" value={SalesPerson.target} onChange={salesPersonHandler} name="target" id="target" className='form-control' />
+                              <label htmlFor="frequency">Frequency <span className='required'>*</span></label>
+                              <input type="text" value={SalesPerson.frequency} onChange={salesPersonHandler} name="frequency" id="frequency" className='form-control' required />
                             </div>
                           </div>
                           <div className="col-md-6">
                             <div className="form-group mt-3">
-                              <label htmlFor="frequency">frequency</label>
-                              <input type="text" value={SalesPerson.frequency} onChange={salesPersonHandler} name="frequency" id="frequency" className='form-control' />
+                              <label htmlFor="maxTarget">Max Target <span className='required'>*</span></label>
+                              <input type="text" value={SalesPerson.maxTarget} onChange={salesPersonHandler} name="maxTarget" id="maxTarget" className='form-control' required />
                             </div>
                           </div>
                           <div className="col-md-6">
                             <div className="form-group mt-3">
-                              <label htmlFor="amount">amount</label>
-                              <input type="text" value={SalesPerson.amount} onChange={salesPersonHandler} name="amount" id="amount" className='form-control' />
+                              <label htmlFor="threshold">Threshold <span className='required'>*</span></label>
+                              <input type="text" value={SalesPerson.amount} onChange={salesPersonHandler} name="threshold" id="threshold" className='form-control' required />
                             </div>
                           </div>
                           <div className="col-md-6">
                             <div className="form-group mt-3">
-                              <label htmlFor="currency">currency</label>
-                              <input type="text" value={SalesPerson.currency} onChange={salesPersonHandler} name="currency" id="currency" className='form-control' />
+                              <label htmlFor="currency">Currency <span className='required'>*</span></label>
+                              <select name="currency" id="currency" value={SalesPerson.currency} onChange={salesPersonHandler} className='form-select' required>
+                                <option value="" hidden>Select</option>
+                                <option value="INR : Indian rupee">INR : Indian rupee</option>
+                                <option value="USD : United States dollar">USD : United States dollar</option>
+                                <option value="GBP : British pound">GBP : British pound</option>
+                                <option value="EUR : Euro">EUR : Euro</option>
+                                <option value="CNY : Chinese yuan">CNY : Chinese yuan</option>
+                                <option value="EGP : Egyptian pound">EGP : Egyptian pound</option>
+                                <option value="CAD : Canadian dollar">CAD : Canadian dollar</option>
+                                <option value="AUD : Australian dollar">AUD : Australian dollar</option>
+                                <option value="BZR : Brazilian real">BZR : Brazilian real</option>
+                                <option value="KWD : Kuwaiti dinar">KWD : Kuwaiti dinar</option>
+                              </select>
                             </div>
                           </div>
                           <div className="col-md-6">
                             <div className="form-group mt-3">
-                              <label htmlFor="duration">duration</label>
-                              <input type="text" value={SalesPerson.duration} onChange={salesPersonHandler} name="duration" id="duration" className='form-control' />
+                              <label htmlFor="duration">Duration <span className='required'>*</span></label>
+                              <select value={SalesPerson.duration} onChange={salesPersonHandler} name="duration" id="duration" className='form-select' required>
+                                <option value="" hidden>Select</option>
+                                <option value="3 months">3 months</option>
+                                <option value="6 months">6 months</option>
+                                <option value="9 months">9 months</option>
+                                <option value="12 months">12 months</option>
+                                <option value="15 months">15 months</option>
+                                <option value="18 months">18 months</option>
+                                <option value="21 months">21 months</option>
+                                <option value="24 months">24 months</option>
+                              </select>
                             </div>
                           </div>
-                        </>) : null
+                        </>)
                     }
                     <div className="col-12 mt-4">
                       <div className="input-group d-flex justify-content-center">

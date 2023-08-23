@@ -81,7 +81,7 @@ const UpdateUser = () => {
                 </div>
                 <div className="input-group mt-4 d-flex justify-content-center">
                   <input type="submit" className='btn  btn-success' value={'Submit'} />
-                  <button className='btn btn-secondary' onClick={clearHandler}>Clear</button>
+                  <button type='button' className='btn btn-secondary' onClick={clearHandler}>Clear</button>
                 </div>
               </form>
             </div>

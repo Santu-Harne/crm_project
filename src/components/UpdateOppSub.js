@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import api from '../util/api'
-import { useParams, useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import toast from 'react-hot-toast'
-import axios from 'axios'
-import CurrencyList from 'currency-list'
 
+const initialOpportunity = { opportunityName: '', opportunitySize: '' }
 const initialOpportunitySub = { noOfInstallements: '', price: '', duration: '', currency: '' }
 
 const UpdateOppSub = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [opportunitySub, setOpportunitySub] = useState(initialOpportunitySub)
-  const [currencies, setCurrencies] = useState(null)
+  const [opportunity, setOpportunity] = useState(initialOpportunity)
+  const [contactId, setContactId] = useState(null)
+  const [offeringId, setOfferingId] = useState(null)
   const { state } = useLocation()
   const { oppId, oppSubId } = state
   const navigate = useNavigate()
@@ -28,6 +29,10 @@ const UpdateOppSub = () => {
     const { name, value } = e.target
     setOpportunitySub({ ...opportunitySub, [name]: value })
   }
+  const opportunityHandler = (e) => {
+    const { name, value } = e.target
+    setOpportunity({ ...opportunity, [name]: value })
+  }
   const clearHandler = () => {
     if (window.confirm('Are you sure to clear fields?')) {
       setOpportunitySub(initialOpportunitySub)
@@ -35,32 +40,47 @@ const UpdateOppSub = () => {
   }
   const submitHandler = async (e) => {
     e.preventDefault()
-    api.put(`/app/latestUpdate/${oppSubId}/${oppId}`, opportunitySub)
-      .then(res => {
-        // console.log(res.data);
-        toast.success('OpportunitySub updated successfully')
-        setOpportunitySub(initialOpportunitySub)
-        navigate(`/opportunitySub_list`, { state: { oppId: oppId } })
-      }).catch(err => console.log(err))
+    try {
+      await api.put(`/app/${oppId}/${contactId}/${offeringId}`, opportunity)
+        .then(res => {
+          // console.log(res.data);
+        }).catch(err => console.log(err))
+
+      await api.put(`/app/latestUpdate/${oppSubId}/${oppId}`, opportunitySub)
+        .then(res => {
+          // console.log(res.data);
+        }).catch(err => console.log(err))
+
+      setOpportunity(initialOpportunity)
+      setOpportunitySub(initialOpportunitySub)
+      toast.success('Opportunity details updated successfully')
+      navigate(`/opportunitySub_list`, { state: { oppId: oppId } })
+    } catch (error) {
+      console.log(error.message);
+    }
   }
   useEffect(() => {
     const initialFetch = async () => {
-      api.get(`/app/getOpportunitySub/${oppSubId}`)
+
+      await api.get(`/app/${oppId}`)
+        .then(res => {
+          // console.log(res.data);
+          const { opportunityName, opportunitySize } = res.data
+          setOpportunity({ ...opportunity, opportunityName, opportunitySize })
+          setContactId(res.data.contact.contactId)
+          setOfferingId(res.data.offering.offeringId)
+        }).catch(err => console.log(err))
+
+      await api.get(`/app/getOpportunitySub/${oppSubId}`)
         .then(res => {
           // console.log(res.data);
           const { noOfInstallements, price, duration, currency } = res.data
           setOpportunitySub({ ...opportunitySub, noOfInstallements, price, duration, currency })
-          setIsLoading(false)
+
         }).catch(err => console.log(err))
-
-      // console.log(CurrencyList.getAll('en_US'))
+      setIsLoading(false)
     }
-    initialFetch()
-    // axios.get('https://restcountries.com/v3.1/all')
-    //   .then(res => {
-    //     console.log(res);
-
-    //   }).catch(err => console.log(err))
+    initialFetch();
   }, [])
   return (
     <div className='container'>
@@ -75,6 +95,14 @@ const UpdateOppSub = () => {
                 <form onSubmit={submitHandler}>
                   <div className="row">
                     <div className="form-group mt-3">
+                      <label htmlFor="opportunityName">Opportunity Name <span className='required'>*</span></label>
+                      <input type="text" name="opportunityName" id="opportunityName" value={opportunity.opportunityName} onChange={opportunityHandler} className='form-control' required />
+                    </div>
+                    <div className="form-group mt-3">
+                      <label htmlFor="opportunitySize">Opportunity Size <span className='required'>*</span></label>
+                      <input type="text" name="opportunitySize" id="opportunitySize" value={opportunity.opportunitySize} onChange={opportunityHandler} className='form-control' required />
+                    </div>
+                    <div className="form-group mt-3">
                       <label htmlFor="noOfInstallments">No Of Installments <span className='required'>*</span></label>
                       <input type="number" name="noOfInstallements" id="noOfInstallements" value={opportunitySub.noOfInstallements} onChange={opportunitySubHandler} className='form-control' required />
                     </div>
@@ -84,7 +112,7 @@ const UpdateOppSub = () => {
                     </div>
                     <div className="form-group mt-3">
                       <label htmlFor="duration">Duration <span className='required'>*</span></label>
-                      <input type="date" min={getCurrentDate()} name="duration" id="duration" value={opportunitySub.duration ? opportunitySub.duration : getCurrentDate()} onChange={opportunitySubHandler} className='form-control' required />
+                      <input type="date" min={opportunitySub.duration ? opportunitySub.duration : getCurrentDate()} name="duration" id="duration" value={opportunitySub.duration ? opportunitySub.duration : getCurrentDate()} onChange={opportunitySubHandler} className='form-control' />
                     </div>
                     <div className="form-group mt-3">
                       <label htmlFor="currency">Currency <span className='required'>*</span></label>
@@ -92,9 +120,16 @@ const UpdateOppSub = () => {
                         {
                           opportunitySub.currency ? <option value={opportunitySub.currency} hidden>{opportunitySub.currency}</option> : <option value="" hidden>Select</option>
                         }
-                        <option value="₹ Indian Rupees">₹ Indian Rupees</option>
-                        <option value="$ US Dollar">$ US Dollar</option>
-                        <option value="£ British Pound">£ British Pound</option>
+                        <option value="INR : Indian rupee">INR : Indian rupee</option>
+                        <option value="USD : United States dollar">USD : United States dollar</option>
+                        <option value="GBP : British pound">GBP : British pound</option>
+                        <option value="EUR : Euro">EUR : Euro</option>
+                        <option value="CNY : Chinese yuan">CNY : Chinese yuan</option>
+                        <option value="EGP : Egyptian pound">EGP : Egyptian pound</option>
+                        <option value="CAD : Canadian dollar">CAD : Canadian dollar</option>
+                        <option value="AUD : Australian dollar">AUD : Australian dollar</option>
+                        <option value="BZR : Brazilian real">BZR : Brazilian real</option>
+                        <option value="KWD : Kuwaiti dinar">KWD : Kuwaiti dinar</option>
                       </select>
                     </div>
                   </div>

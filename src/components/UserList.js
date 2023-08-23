@@ -1,8 +1,6 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import api from '../util/api'
 import { useParams, useNavigate } from 'react-router-dom'
-import toast from 'react-hot-toast'
-import axios from 'axios'
 
 
 const UserList = () => {
@@ -10,17 +8,21 @@ const UserList = () => {
   const [isLoading, setIsLoading] = useState(true)
 
   const navigate = useNavigate()
-  const { adminId, userId } = useParams()
+  const { adminId } = useParams()
 
-  useEffect(() => {
+  const initialFetch = useCallback(() => {
     api.get('/api/getAllUsersNDtos')
       .then(res => {
         // console.log(res.data);
         setUsers(res.data)
         setIsLoading(false)
       }).catch(err => console.log(err))
-  }, [])
+  }, [users])
 
+  useEffect(() => {
+    initialFetch()
+
+  }, [])
   return (
     <div className='mx-3'>
       <div className="row">

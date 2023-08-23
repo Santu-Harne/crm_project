@@ -1,7 +1,6 @@
-import { useEffect } from 'react'
 import './App.css';
 import { Toaster } from 'react-hot-toast';
-import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import UserRegister from './components/UserRegister';
 import Login from './components/Login';
 import ForgotPassword from './components/ForgotPassword';
@@ -16,16 +15,12 @@ import UserList from './components/UserList';
 import StatusUpdate from './components/StatusUpdate';
 import OpportunityList from './components/OpportunityList';
 import OpportunitySubList from './components/OpportunitySubList';
-import UpdateOpportunity from './components/UpdateOpportunity';
 import UpdateOppSub from './components/UpdateOppSub';
 import SalesPersonList from './components/SalesPersonList';
 
 
 function App() {
 
-  useEffect(() => {
-
-  }, [])
   return (
     <div>
       <Router>
@@ -41,8 +36,7 @@ function App() {
             <Route path='/user_register' element={<UserRegister />} />
             <Route path='/salesPersons_list' element={<SalesPersonList />} />
             <Route path='/update_sales_person' element={<UpdateSalesPerson />} />
-            <Route path='/update_opportunity' element={<UpdateOpportunity />} />
-            <Route path='/oppSub_update' element={<UpdateOppSub />} />
+            <Route path='/opportunity_update' element={<UpdateOppSub />} />
             <Route path='/update_user/:userId' element={<UpdateUser />} />
             <Route path='/admin/updateRoleReporting/:adminId/:userId' element={<UpdateUserByAdmin />} />
             <Route path='/admin/statusUpdate/:adminId/:userId' element={<StatusUpdate />} />

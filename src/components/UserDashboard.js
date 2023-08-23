@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import api from '../util/api'
-import { useParams, useNavigate, useLocation } from 'react-router-dom'
-import toast from 'react-hot-toast'
+import { useLocation } from 'react-router-dom'
 import AdminDashboard from './Dashboards/AdminDashboard'
 import MarketingManagerDashboard from './Dashboards/MarketingManagerDashboard'
 import SalesManagerDashboard from './Dashboards/SalesManagerDashboard'
@@ -18,11 +17,9 @@ const UserDashboard = () => {
   const [isSalesPerson, setIsSalesPerson] = useState(false)
   const [isSalesManager, setIsSalesManager] = useState(false)
   const [isSupportingManager, setIsSupportingManager] = useState(false)
-  const [isRestrictedUser, setIsRestrictedUser] = useState(false)
 
   // const { userId } = useParams()
   const { state } = useLocation()
-  const navigate = useNavigate()
 
   useEffect(() => {
     const initialFetch = async () => {
@@ -34,7 +31,6 @@ const UserDashboard = () => {
           if (res.data.role === 'SalesPerson') setIsSalesPerson(true)
           if (res.data.role === 'Sales Manager') setIsSalesManager(true)
           if (res.data.role === 'Supporting Manager') setIsSupportingManager(true)
-          if (res.data.role === 'Restricted User') setIsRestrictedUser(true)
           setIsLoading(false)
         }).catch(err => console.log(err))
       return {
