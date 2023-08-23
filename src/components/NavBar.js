@@ -37,19 +37,10 @@ const NavBar = () => {
                 <Link className='nav-link' to={'/reset_password'}>Res_Password</Link>
               </li>
               <li className="nav-item">
-                <Link className='nav-link' to={'/admin/updateRoleReporting/user_0004/user_0006'}>UpdBy_Admin</Link>
-              </li>
-              <li className="nav-item">
                 <Link className='nav-link' to={'/salesPersons_list'}>SP_List</Link>
               </li>
               <li className="nav-item">
                 <Link className='nav-link' to={'/opportunities_list'}>Opp_List</Link>
-              </li>
-              <li className="nav-item">
-                <Link className='nav-link' to={'/update_opportunity/opportunity_01'}>Update_Opp</Link>
-              </li>
-              <li className="nav-item">
-                <Link className='nav-link' to={'/opportunitySub_list/opportunity_06'}>OppSub_List</Link>
               </li>
               <li className="nav-item">
                 <button className='btn btn-secondary rounded-circle' onClick={logoutHandler}><i className="fa-solid fa-power-off"></i></button>
