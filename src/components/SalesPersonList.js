@@ -44,7 +44,7 @@ const SalesPersonList = () => {
       <div className="row ">
         <div className="col-12">
           <div className="card mt-4">
-            <div className="card-header d-flex flex-wrap justify-content-between align-items-center">
+            <div className="card-header d-flex flex-wrap  justify-content-between align-items-center">
               <div className='d-flex flex-wrap'>
                 <h2 className="text-info me-3">SalesPersons List</h2>
                 <div className='d-flex align-items-center '>
@@ -60,7 +60,7 @@ const SalesPersonList = () => {
                   </datalist>
                 </div>
               </div>
-              <button type='button' className='btn btn-warning btn-sm' onClick={() => { if (spId) navigate(`/update_sales_person`, { state: { spId } }); else { alert('Please select salesPerson to edit!') } }}>Edit</button>
+              <button type='button' className='btn btn-warning btn-sm' onClick={() => { if (spId) navigate(`/update_sales_person`, { state: { spId } }); else { alert('Please select salesPerson to update details!') } }}>Update</button>
             </div>
             <div className="card-body sp-list">
               {
@@ -74,9 +74,9 @@ const SalesPersonList = () => {
                         <th>Email</th>
                         <th>MobileNo</th>
                         <th>AltMblNo</th>
-                        <th>Target</th>
+                        <th>Max Target</th>
                         <th>Frequency</th>
-                        <th>Amount</th>
+                        <th>Threshold</th>
                         <th>Currency</th>
                         <th>Duration</th>
                       </tr>
@@ -92,9 +92,9 @@ const SalesPersonList = () => {
                               <td>{sp.user.email}</td>
                               <td>{sp.user.mobileNo}</td>
                               <td>{sp.user.altMobileNo}</td>
-                              <td>{sp.target}</td>
+                              <td>{sp.maxTarget}</td>
                               <td>{sp.frequency}</td>
-                              <td>{sp.amount}</td>
+                              <td>{sp.threshold}</td>
                               <td>{sp.currency}</td>
                               <td>{sp.duration}</td>
                             </tr>
