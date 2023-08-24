@@ -64,33 +64,13 @@ const OpportunityList = () => {
       <div className="row">
         <div className="col-12">
           <div className="card mt-3">
-            <div className="card-header d-flex flex-wrap justify-content-between align-items-center">
-              <div className='d-flex flex-wrap'>
-                <h2 className="text-info me-3">Opportunity List</h2>
-                <div className='d-flex align-items-center '>
-                  <input onChange={contactSearchHandler} type="text" name='contact-name' id='contact-name' className='form-control' list='contact_name' placeholder='Search by contact name' />
-                  <datalist id='contact_name'>
-                    {
-                      opportunities_list && opportunities_list.map((item, index) => {
-                        return (
-                          <option key={index} value={item.contact.firstName}>{item.contact.firstName}</option>
-                        )
-                      })
-                    }
-                  </datalist>
-                  <input onChange={offeringSearchHandler} type="text" name='offering-name' id='offering-name' className='form-control ms-3' placeholder='Search by offering name' list='offering_name' />
-                  <datalist id='offering_name'>
-                    {
-                      opportunities_list && opportunities_list.map((item, index) => {
-                        return (
-                          <option key={index} value={item.offering.offeringName}>{item.offering.offeringName}</option>
-                        )
-                      })
-                    }
-                  </datalist>
-                </div>
+            <div className="card-header d-flex align-items-center flex-wrap">
+              <h2 className="text-info me-3">Opportunity List</h2>
+              <div className="d-flex justify-content-between  align-items-center me-3">
+                <input onChange={contactSearchHandler} type="text" name='contact-name' id='contact-name' className='form-control' list='contact_name' placeholder='Search by contact name' />
+                <input onChange={offeringSearchHandler} type="text" name='offering-name' id='offering-name' className='form-control ms-3' placeholder='Search by offering name' list='offering_name' />
               </div>
-              <button type='button' className='btn btn-warning btn-sm mt-3' onClick={() => { if (oppId) navigate(`/opportunitySub_list`, { state: { oppId } }); else { alert('Please select opportunity to see Opportunity Details!') } }}>Opp Details</button>
+              <button type='button' className='btn btn-warning' onClick={() => { if (oppId) navigate(`/opportunitySub_list`, { state: { oppId } }); else { alert('Please select opportunity to see Opportunity Details!') } }}>Opp Details</button>
             </div>
             <div className="card-body opportunities-list">
               {
@@ -99,9 +79,9 @@ const OpportunityList = () => {
                     <thead>
                       <tr>
                         <th>Select</th>
-                        <th>Sl.No</th>
                         <th>OppName</th>
                         <th>OppSize</th>
+                        <th>OppCreatedDate</th>
                         <th>ContactName</th>
                         <th>ContactEmail</th>
                         <th>OfferingName</th>
@@ -115,9 +95,9 @@ const OpportunityList = () => {
                             <tr key={opp.opportunityId}>
                               <td><input type="radio" value={opp.opportunityId} onChange={changeHandler} name="opp_select" id="opp_select" /></td>
                               {/* <td>{opp.opportunityId}</td> */}
-                              <td>{index + 1}</td>
                               <td>{opp.opportunityName}</td>
                               <td>{opp.opportunitySize}</td>
+                              <td>{opp.opportunityCreatedDate}</td>
                               <td>{opp.contact.firstName} {opp.contact.lastName}</td>
                               <td>{opp.contact.email}</td>
                               <td>{opp.offering.offeringName}</td>

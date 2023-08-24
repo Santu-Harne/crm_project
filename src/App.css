@@ -53,8 +53,6 @@ body {
 .opportunities-list,
 .oppSub-table,
 .sp-list {
-  /* height: 450px; */
-  /* height: max(200px, 450px); */
   min-height: 100px;
   max-height: 450px;
   overflow: auto;

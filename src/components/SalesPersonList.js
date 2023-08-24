@@ -33,7 +33,7 @@ const SalesPersonList = () => {
   useEffect(() => {
     api.get('/app/getAllSalesPerson')
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         setSalePersons(res.data)
         setSalesPersonsList(res.data)
         setIsLoading(false)
@@ -49,7 +49,7 @@ const SalesPersonList = () => {
                 <h2 className="text-info me-3">SalesPersons List</h2>
                 <div className='d-flex align-items-center '>
                   <input type="text" name="sp-name" id="sp-name" className='form-control' list='sp_name' onChange={nameSearchHandler} placeholder='Search by SalesPerson name' />
-                  <datalist id='sp_name'>
+                  {/* <datalist id='sp_name'>
                     {
                       salePersons && salePersons.map((sp, index) => {
                         return (
@@ -57,7 +57,7 @@ const SalesPersonList = () => {
                         )
                       })
                     }
-                  </datalist>
+                  </datalist> */}
                 </div>
               </div>
               <button type='button' className='btn btn-warning btn-sm' onClick={() => { if (spId) navigate(`/update_sales_person`, { state: { spId } }); else { alert('Please select salesPerson to update details!') } }}>Update</button>
@@ -70,7 +70,7 @@ const SalesPersonList = () => {
                       <tr>
                         <th>Select</th>
                         <th>Sl.No</th>
-                        <th>Name</th>
+                        <th>Name <i className="fa-solid fa-sort"></i></th>
                         <th>Email</th>
                         <th>MobileNo</th>
                         <th>AltMblNo</th>
