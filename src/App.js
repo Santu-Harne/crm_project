@@ -17,6 +17,9 @@ import OpportunityList from './components/OpportunityList';
 import OpportunitySubList from './components/OpportunitySubList';
 import UpdateOppSub from './components/UpdateOppSub';
 import SalesPersonList from './components/SalesPersonList';
+import ContactCreate from './components/ContactCreate';
+import UpdateContact from './components/UpdateContact';
+import AllContactList from './components/AllContactList';
 
 
 function App() {
@@ -43,6 +46,9 @@ function App() {
             <Route path='/reset_password' element={<ResetPassword />} />
             <Route path='/opportunities_list' element={<OpportunityList />} />
             <Route path='/opportunitySub_list' element={<OpportunitySubList />} />
+            <Route path='/createContact' element={<ContactCreate />} />
+            <Route path='/updateContact' element={<UpdateContact />} />
+            <Route path='/allContactList' element={<AllContactList />} />
           </Route>
         </Routes>
       </Router>

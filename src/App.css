@@ -52,12 +52,13 @@ body {
 .users-data,
 .opportunities-list,
 .oppSub-table,
-.sp-list {
+.sp-list,
+.contact-list {
   min-height: 100px;
   max-height: 450px;
   overflow: auto;
 }
-:is(.users-data, .opportunities-list, .oppSub-table, .sp-list) :where(table) :where(td, th) {
+:is(.users-data, .opportunities-list, .oppSub-table, .sp-list, .contact-list) :where(table) :where(td, th) {
   border: 1px dashed rgba(139, 135, 135, 0.676);
   white-space: nowrap;
 }

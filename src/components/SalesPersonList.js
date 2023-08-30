@@ -70,7 +70,7 @@ const SalesPersonList = () => {
                       <tr>
                         <th>Select</th>
                         <th>Sl.No</th>
-                        <th>Name <i className="fa-solid fa-sort"></i></th>
+                        <th>Name</th>
                         <th>Email</th>
                         <th>MobileNo</th>
                         <th>AltMblNo</th>

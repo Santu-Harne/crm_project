@@ -22,6 +22,12 @@ const NavBar = () => {
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
+                <Link className='nav-link' to={'/createContact'}>Crt_Contact</Link>
+              </li>
+              <li className="nav-item">
+                <Link className='nav-link' to={'/allContactList'}>Contact_List</Link>
+              </li>
+              <li className="nav-item">
                 <Link className='nav-link' to={'/login'}>Login</Link>
               </li>
               <li className="nav-item">

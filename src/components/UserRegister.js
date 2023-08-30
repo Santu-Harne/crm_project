@@ -75,6 +75,7 @@ const UserRegister = () => {
       setSalesPerson(initialSalesPerson)
       setUser(initialUser)
       setReportingTo("")
+      initialFetch()
     } catch (error) {
       console.log(error.message);
     }
@@ -97,21 +98,23 @@ const UserRegister = () => {
     }
   }
 
-  // on component mount all users list is fetched and stored in state
-  useEffect(() => {
+  const initialFetch = () => {
     try {
-      const initialFetch = () => {
-        api.get('/api/getAllUsersNDtos')
-          .then(res => {
-            // console.log(res.data);
-            setExtUsers(res.data)
-            setReportingToUsers(res.data)
-          }).catch(err => console.log(err.message))
-      }
-      initialFetch()
+      api.get('/api/getAllUsersNDtos')
+        .then(res => {
+          // console.log(res.data);
+          setExtUsers(res.data)
+          setReportingToUsers(res.data)
+        }).catch(err => console.log(err.message))
     } catch (error) {
       console.log(error.message);
     }
+  }
+
+
+  // on component mount all users list is fetched and stored in state
+  useEffect(() => {
+    initialFetch()
   }, [])
   return (
     <div>
@@ -239,7 +242,7 @@ const UserRegister = () => {
                     <div className="col-12 mt-4">
                       <div className="input-group d-flex justify-content-center">
                         <input type="submit" className='btn  btn-success' value={'Submit'} />
-                        <button className='btn btn-secondary' onClick={clearHandler}>Clear</button>
+                        <button type='button' className='btn btn-secondary' onClick={clearHandler}>Clear</button>
                       </div>
                     </div>
                   </div>

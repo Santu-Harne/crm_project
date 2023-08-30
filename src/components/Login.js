@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import api from '../util/api';
 
 const initialState = {
-	email: 'santosh.283143@gmail.com',
-	password: 'Santosh1437$'
+	email: 'nash786@gmail.com',
+	password: 'Nash@1234'
 }
 
 const Login = () => {
@@ -39,7 +40,7 @@ const Login = () => {
 	// function to call login api
 	const submitHandler = async (e) => {
 		e.preventDefault()
-		await axios.post('/auth/login', user)
+		await api.post('/auth/login', user)
 			.then(res => {
 				// console.log(res.data);
 				localStorage.setItem('token', res.data.jwtToken)

@@ -21,7 +21,10 @@ const ForgotPassword = () => {
 			.then(res => {
 				toast.success('Otp sent successfully')
 				// console.log(res);
-			}).catch(err => toast.error(err.response.data))
+			}).catch(err => {
+				// console.log(err.response.data)
+				toast.error(err.response.data)
+			})
 	}
 	const verifyHandler = () => {
 		axios.post(`/forget/verify/${userDetails.otp}`)

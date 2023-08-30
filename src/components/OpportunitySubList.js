@@ -80,7 +80,7 @@ const OpportunitySubList = () => {
                           <tr key={oppSub.opportunitySubId}>
                             <td>{index + 1}</td>
                             {/* <td>{oppSub.opportunitySubId}</td> */}
-                            <td>{oppSub.opportunityCreatedDate}</td>
+                            <td>{oppSub.opportunityStatusDate}</td>
                             <td>{oppSub.noOfInstallements}</td>
                             <td>{oppSub.price}</td>
                             <td>{oppSub.duration}</td>
