@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import api from '../util/api'
+import axios from 'axios'
 import { useLocation } from 'react-router-dom'
 import AdminDashboard from './Dashboards/AdminDashboard'
 import MarketingManagerDashboard from './Dashboards/MarketingManagerDashboard'
@@ -23,7 +24,7 @@ const UserDashboard = () => {
 
   useEffect(() => {
     const initialFetch = async () => {
-      await api.get(`/api/getDtoById/${state.userId}`)
+      await axios.get(`http://crm-made-simple-f8a83a9caed2.herokuapp.com/api/getDtoById/${state.userId}`)
         .then(res => {
           setCurrentUser(res.data)
           if (res.data.role === 'Administrator') setIsAdmin(true)
