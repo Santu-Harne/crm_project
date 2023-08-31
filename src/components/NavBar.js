@@ -1,6 +1,6 @@
 import React from 'react'
 import toast from 'react-hot-toast'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const NavBar = () => {
 
@@ -8,7 +8,7 @@ const NavBar = () => {
     if (window.confirm('Are you sure to log out?')) {
       localStorage.removeItem('token')
       toast.success('Logged out successfully')
-      window.location.href = '/login'
+      navigate('/')
     }
   }
   return (
