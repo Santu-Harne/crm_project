@@ -1,9 +1,18 @@
+<<<<<<< HEAD
 
 [[redirects]]
   from = "*"
   to = "http://crm-made-simple-f8a83a9caed2.herokuapp.com/:splat"
   status = 200
 
+=======
+[[redirects]]
+  from = "http://localhost:3000"
+  to = "http://192.168.0.101:8080"
+  status = 200
+  force = true
+  headers = {X-From = "Netlify"}
+>>>>>>> cfdc35ffcacf2c42b00a99958e11f83421d1f086
 [[headers]]
   for = "/*"
   [headers.values]
