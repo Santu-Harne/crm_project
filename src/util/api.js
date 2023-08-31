@@ -2,12 +2,7 @@ import axios from 'axios'
 
 // Create an Axios instance
 // const token = localStorage.getItem('token');
-const api = axios.create({
-  baseURL: 'http://crm-made-simple-f8a83a9caed2.herokuapp.com',
-  headers: {
-    'Content-Type': 'application/json'
-  }
-});
+const api = axios.create();
 
 // Request interceptor to add the JWT token to the Authorization header
 api.interceptors.request.use(

@@ -82,11 +82,11 @@ const AllContactList = () => {
                             <td>{contact.designation}</td>
                             <td>{contact.department}</td>
                             <td>{contact.type}</td>
-                            <td>{contact.vendorType}</td>
-                            <td>{contact.vendorDescription}</td>
-                            <td>{contact.partnerType}</td>
-                            <td>{contact.partnerSkills}</td>
-                            <td>{contact.partnerDescription}</td>
+                            <td>{contact.vendorType || '---'}</td>
+                            <td>{contact.vendorDescription || '---'}</td>
+                            <td>{contact.partnerType || '---'}</td>
+                            <td>{contact.partnerSkills || '---'}</td>
+                            <td>{contact.partnerDescription || '---'}</td>
                           </tr>
                         )
                       })
