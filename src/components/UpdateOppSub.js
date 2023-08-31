@@ -67,7 +67,7 @@ const UpdateOppSub = () => {
           // console.log(res.data);
           const { opportunityName, opportunitySize } = res.data
           setOpportunity({ ...opportunity, opportunityName, opportunitySize })
-          setContactId(res.data.contact.contactId)
+          setContactId(res.data.contactSub.contactSubId)
           setOfferingId(res.data.offering.offeringId)
         }).catch(err => console.log(err))
 

@@ -21,7 +21,7 @@ const OpportunitySubList = () => {
 
       await api.get(`/app/getAllOpportunitySubByOpportunity/${state.oppId}`)
         .then(res => {
-          // console.log(res.data);
+          console.log(res.data);
           setOppSubList(res.data);
           setOppSubId(res.data[0].opportunitySubId)
           setIsLoading(false)
@@ -52,8 +52,8 @@ const OpportunitySubList = () => {
                         <div className="col-md-6"><h5><span className='text-secondary'>Opp Name : </span>{opportunity.opportunityName}</h5>
                         </div>
                         <div className="col-md-6"><h5><span className='text-secondary'>Opp Size : </span>{opportunity.opportunitySize}</h5></div>
-                        <div className="col-md-6"><h5><span className='text-secondary'>Contact Name : </span>{opportunity.contact.firstName} {opportunity.contact.lastName}</h5></div>
-                        <div className="col-md-6"><h5><span className='text-secondary'>Contact Email : </span>{opportunity.contact.email}</h5></div>
+                        <div className="col-md-6"><h5><span className='text-secondary'>Contact Name : </span>{opportunity.contactSub["contactId"]["firstName"]} {opportunity.contactSub["contactId"]["lastName"]}</h5></div>
+                        <div className="col-md-6"><h5><span className='text-secondary'>Contact Email : </span>{opportunity.contactSub["contactId"]["email"]}</h5></div>
                         <div className="col-md-6"><h5><span className='text-secondary'>Offering Name : </span>{opportunity.offering.offeringName}</h5></div>
                         <div className="col-md-6"><h5><span className='text-secondary'>Offering Validity : </span>{opportunity.offering.validTillDate}</h5></div>
                       </div>

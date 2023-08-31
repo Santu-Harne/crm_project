@@ -94,12 +94,11 @@ const OpportunityList = () => {
                           return (
                             <tr key={opp.opportunityId}>
                               <td><input type="radio" value={opp.opportunityId} onChange={changeHandler} name="opp_select" id="opp_select" /></td>
-                              {/* <td>{opp.opportunityId}</td> */}
                               <td>{opp.opportunityName}</td>
                               <td>{opp.opportunitySize}</td>
                               <td>{opp.opportunityCreatedDate}</td>
-                              <td>{opp.contact.firstName} {opp.contact.lastName}</td>
-                              <td>{opp.contact.email}</td>
+                              <td>{opp.contactSub["contactId"]["firstName"]} {opp.contactSub["contactId"]["lastName"]}</td>
+                              <td>{opp.contactSub["contactId"]["email"]}</td>
                               <td>{opp.offering.offeringName}</td>
                               <td>{opp.offering.validTillDate}</td>
                             </tr>
