@@ -23,7 +23,7 @@ const ForgotPassword = () => {
 				// console.log(res);
 			}).catch(err => {
 				// console.log(err.response.data)
-				toast.error(err.response.data)
+				toast.error('Something wrong, please try after some time!')
 			})
 	}
 	const verifyHandler = () => {

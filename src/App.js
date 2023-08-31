@@ -30,6 +30,7 @@ function App() {
         <Toaster />
         <NavBar />
         <Routes>
+          <Route path='/login' element={<Login />} />
           <Route path='/' element={<Login />} />
           <Route path='/forgot_password' element={<ForgotPassword />} />
           <Route element={<ProtectedRoute />}>

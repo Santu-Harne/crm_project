@@ -21,7 +21,7 @@ const OpportunitySubList = () => {
 
       await api.get(`/app/getAllOpportunitySubByOpportunity/${state.oppId}`)
         .then(res => {
-          console.log(res.data);
+          // console.log(res.data);
           setOppSubList(res.data);
           setOppSubId(res.data[0].opportunitySubId)
           setIsLoading(false)
