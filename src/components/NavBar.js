@@ -4,6 +4,8 @@ import { Link, useNavigate } from 'react-router-dom'
 
 const NavBar = () => {
 
+  const navigate = useNavigate()
+
   const logoutHandler = () => {
     if (window.confirm('Are you sure to log out?')) {
       localStorage.removeItem('token')
