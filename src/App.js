@@ -1,6 +1,6 @@
 import './App.css';
 import { Toaster } from 'react-hot-toast';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import UserRegister from './components/UserRegister';
 import Login from './components/Login';
 import ForgotPassword from './components/ForgotPassword';
