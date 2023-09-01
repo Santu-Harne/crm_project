@@ -10,7 +10,7 @@ const NavBar = () => {
     if (window.confirm('Are you sure to log out?')) {
       localStorage.removeItem('token')
       toast.success('Logged out successfully')
-      navigate('/')
+      navigate('/login')
     }
   }
   return (

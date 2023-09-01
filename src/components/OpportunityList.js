@@ -82,8 +82,8 @@ const OpportunityList = () => {
                         <th>OppName</th>
                         <th>OppSize</th>
                         <th>OppCreatedDate</th>
-                        <th>ContactName</th>
-                        <th>ContactEmail</th>
+                        {/* <th>ContactName</th>
+                        <th>ContactEmail</th> */}
                         <th>OfferingName</th>
                         <th>OffValid</th>
                       </tr>
@@ -97,8 +97,8 @@ const OpportunityList = () => {
                               <td>{opp.opportunityName}</td>
                               <td>{opp.opportunitySize}</td>
                               <td>{opp.opportunityCreatedDate}</td>
-                              <td>{opp.contactSub["contactId"]["firstName"]} {opp.contactSub["contactId"]["lastName"]}</td>
-                              <td>{opp.contactSub["contactId"]["email"]}</td>
+                              {/* <td>{opp.contactSub["contactId"]["firstName"]} {opp.contactSub["contactId"]["lastName"]}</td>
+                              <td>{opp.contactSub["contactId"]["email"]}</td> */}
                               <td>{opp.offering.offeringName}</td>
                               <td>{opp.offering.validTillDate}</td>
                             </tr>

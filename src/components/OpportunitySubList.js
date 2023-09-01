@@ -52,8 +52,8 @@ const OpportunitySubList = () => {
                         <div className="col-md-6"><h5><span className='text-secondary'>Opp Name : </span>{opportunity.opportunityName}</h5>
                         </div>
                         <div className="col-md-6"><h5><span className='text-secondary'>Opp Size : </span>{opportunity.opportunitySize}</h5></div>
-                        <div className="col-md-6"><h5><span className='text-secondary'>Contact Name : </span>{opportunity.contactSub["contactId"]["firstName"]} {opportunity.contactSub["contactId"]["lastName"]}</h5></div>
-                        <div className="col-md-6"><h5><span className='text-secondary'>Contact Email : </span>{opportunity.contactSub["contactId"]["email"]}</h5></div>
+                        {/* <div className="col-md-6"><h5><span className='text-secondary'>Contact Name : </span>{opportunity.contactSub["contactId"]["firstName"]} {opportunity.contactSub["contactId"]["lastName"]}</h5></div>
+                        <div className="col-md-6"><h5><span className='text-secondary'>Contact Email : </span>{opportunity.contactSub["contactId"]["email"]}</h5></div> */}
                         <div className="col-md-6"><h5><span className='text-secondary'>Offering Name : </span>{opportunity.offering.offeringName}</h5></div>
                         <div className="col-md-6"><h5><span className='text-secondary'>Offering Validity : </span>{opportunity.offering.validTillDate}</h5></div>
                       </div>
