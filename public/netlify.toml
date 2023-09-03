@@ -1,7 +1,7 @@
 
 [[redirects]]
   from = "/auth/*"
-  to = "http://crm-made-simple-f8a83a9caed2.herokuapp.com/:splat"
+  to = "http://crm-made-simple-f8a83a9caed2.herokuapp.com/auth/:splat"
   status = 200
 
 [[headers]]
