@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import api from '../util/api'
+import api from '../../util/api'
 import { useNavigate, useLocation } from 'react-router-dom'
 import toast from 'react-hot-toast'
 
 const initialState = { firstName: '', lastName: '', email: '', mobileNumber: '', address: '', company: '', country: '', designation: '', department: '', type: '', vendorType: '', vendorDescription: '', partnerType: '', partnerSkills: '', partnerDescription: '' }
 
-const UpdateContact = () => {
+const UpdateVendorAndContact = () => {
   const [contactInfo, setContactInfo] = useState(initialState)
 
   const navigate = useNavigate()
@@ -131,4 +131,4 @@ const UpdateContact = () => {
   )
 }
 
-export default UpdateContact
+export default UpdateVendorAndContact

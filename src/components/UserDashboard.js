@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import api from '../util/api'
-import axios from 'axios'
 import { useLocation } from 'react-router-dom'
 import AdminDashboard from './Dashboards/AdminDashboard'
 import MarketingManagerDashboard from './Dashboards/MarketingManagerDashboard'
@@ -11,8 +10,6 @@ const UserDashboard = () => {
   // current user
   const [currentUser, setCurrentUser] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
-
-  const token = localStorage.getItem('token')
 
   // roles
   const [isAdmin, setIsAdmin] = useState(false)

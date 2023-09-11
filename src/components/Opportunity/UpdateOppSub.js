@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import api from '../util/api'
+import api from '../../util/api'
 import { useNavigate, useLocation } from 'react-router-dom'
 import toast from 'react-hot-toast'
 

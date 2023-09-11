@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import api from '../util/api'
+import api from '../../util/api'
 import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 
-const AllContactList = () => {
+const AllVendorsAndPartnersList = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [contacts, setContacts] = useState(null)
   const [contactId, setContactId] = useState(null)
@@ -102,4 +102,4 @@ const AllContactList = () => {
   )
 }
 
-export default AllContactList
+export default AllVendorsAndPartnersList

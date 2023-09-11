@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import api from '../util/api'
+import api from '../../util/api'
 
 const OpportunitySubList = () => {
   const [oppSubId, setOppSubId] = useState(null)

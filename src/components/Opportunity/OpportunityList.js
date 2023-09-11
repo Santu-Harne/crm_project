@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import api from '../util/api'
+import api from '../../util/api'
 import { useNavigate } from 'react-router-dom'
 
 const OpportunityList = () => {
